@@ -15,7 +15,6 @@ def mover_item(request):
             item = form.cleaned_data['item']
             cantidad = form.cleaned_data['cantidad']
             bodega_destino = form.cleaned_data['bodega_destino']
-
             if cantidad > 0:
                 if cantidad <= item.kilos_netos:
                     if item.bodega != bodega_destino:
@@ -27,14 +26,11 @@ def mover_item(request):
                             except Item.DoesNotExist:
                                 Item.objects.create(numero_item=item.numero_item, kilos_netos=cantidad,
                                                     bodega=bodega_destino)
-
                         item.kilos_netos -= cantidad
                         item.save()
-
                         movimiento = Movimiento(item_historico=item.numero_item, cantidad=cantidad, bodega_origen=item.bodega,
                                                 bodega_destino=bodega_destino)
                         movimiento.save()
-
                         if item.kilos_netos == 0:
                             item.delete()
 
@@ -46,7 +42,6 @@ def mover_item(request):
                 form.add_error('cantidad', "La cantidad de kilos netos debe ser mayor que 0.")
     else:
         form = MovimientoForm()
-
     for bodega in Bodega.objects.all():
         items_bodega = Item.objects.filter(bodega=bodega).distinct('numero_item')
         for item in items_bodega:
@@ -54,8 +49,5 @@ def mover_item(request):
                 total=Sum('kilos_netos'))['total']
             item.kilos_netos = cantidad_total
             item.save()
-
     items = Item.objects.exclude(bodega__nombre="Salida Total").filter(kilos_netos__gt=0, bodega__isnull=False)
-
-    print('Items antes de la eliminación:', items)
     return render(request, 'mover_item.html', {'form': form, 'items': items})
