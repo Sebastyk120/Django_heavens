@@ -1,0 +1,14 @@
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Mover</button>
+</form>
+
+<h2>Items en bodega</h2>
+<ul>
+  {% for item in items %}
+    <li>{{ item }} - Kilos: {{ item.kilos_netos }} - Bodega: {% if item.bodega %}{{ item.bodega.nombre }}{% else %}N/A{% endif %}</li>
+  {% empty %}
+    <li>No hay items</li>
+  {% endfor %}
+</ul>
