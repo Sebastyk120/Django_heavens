@@ -94,6 +94,12 @@ ol {
   top: 100px;
   z-index: -3;
 }
+.lastlog{
+
+  color: white;
+  justify-content: flex-end;
+
+}
 
 h2{
   font-size: 45px;
@@ -105,6 +111,7 @@ h2{
   overflow: hidden;
   color: white;
 }
+
 
 @keyframes escribiendo {
   from {
