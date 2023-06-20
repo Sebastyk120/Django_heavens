@@ -4,8 +4,11 @@ from .forms import MovimientoForm
 from .models import Bodega, Item, Movimiento
 
 
-def home_operaciones(request):
+def home_operaciones2(request):
     return render(request, 'home_operaciones.html')
+
+def inventariotr(request):
+    return render(request, 'inventariotr.html')
 
 
 def mover_item(request):
