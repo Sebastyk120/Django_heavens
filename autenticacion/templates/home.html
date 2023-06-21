@@ -29,7 +29,7 @@
     <div id="header">
         <ul class="nav">
             <li><a href="">Tesoreria</a></li>
-            <li><a href="">Nomina</a>
+            <li><a href="{% url 'nomina_home' %}">Nomina</a>
                 <ul>
                     <li><a href="">Ausentismos</a></li>
                     <li><a href="">Descuentos</a></li>
@@ -59,9 +59,9 @@
                     </li>
                 </ul>
             </li>
-            <li><a href="">Operaciones</a>
+            <li><a href="{% url 'home_operaciones2' %}">Operaciones</a>
                 <ul>
-                    <li><a href="{% url 'home_operaciones2' %}">Inventario Tiempo Real</a></li>
+                    <li><a href="{% url 'inventariotr' %}">Inventario Tiempo Real</a></li>
                     <li><a href="">Nacionales y Devoluciones</a></li>
                     <li><a href="">Inventario de Salida</a></li>
                     <li><a href="">Porcentajes de Muestreo</a></li>
