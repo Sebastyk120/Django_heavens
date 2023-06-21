@@ -15,6 +15,9 @@ from rest_framework.response import Response
 
 # Create your views here.
 
+def nomina_home(request):
+    return render(request, 'nomina_home.html')
+
 def home_nomina(request):
     return render(request, 'home_nomina.html')
 
@@ -707,7 +710,7 @@ def actualizar_empleado(request, empleado_id):
 
     if request.method == 'GET':
         form = CrearempleadoForm(instance=empleado)
-        return render(request, 'actualizar_empleado.html', {'empleado': empleado, 'form': form})
+        return render(request, 'crear_empleados.html', {'empleado': empleado, 'form': form})
     elif request.method == 'POST':
         if request.user.has_perm('nomina.change_empleados'):
             form = CrearempleadoForm(request.POST, instance=empleado)
@@ -717,7 +720,7 @@ def actualizar_empleado(request, empleado_id):
                     request, f"El empleado {empleado.nombre} ha sido actualizado correctamente")
                 return redirect('empleados')
             else:
-                return render(request, 'actualizar_empleado.html',
+                return render(request, 'crear_empleados.html',
                               {'empleado': empleado, 'form': form, 'error': "Error de datos"})
         else:
             return HttpResponseForbidden("No tiene permisos para editar un empleado.")

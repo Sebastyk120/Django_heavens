@@ -561,10 +561,10 @@ screen and (max-height: 900px) {
 
     img.opmanguito {
 
-        width: 180px;
-        height: 180px;
+        width: 120px;
+        height: 120px;
         position: relative;
-        left: 130px;
+        left: 50px;
         top: 50px;
         transition: transform .7s ease-in-out;
     }
@@ -578,21 +578,19 @@ screen and (max-height: 900px) {
         20% {
             transform: translateY(-30px);
         }
-
+    
         40% {
             transform: translateY(0px);
         }
-
-
+    
+    
         60% {
             transform: translateY(-30px);
         }
-
+    
         80% {
             transform: translateY(0px);
         }
-
-    }
 
     body {
         height: 100vh;
