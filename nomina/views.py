@@ -710,7 +710,7 @@ def actualizar_empleado(request, empleado_id):
 
     if request.method == 'GET':
         form = CrearempleadoForm(instance=empleado)
-        return render(request, 'crear_empleados.html', {'empleado': empleado, 'form': form})
+        return render(request, 'actualizar_empleado.html', {'empleado': empleado, 'form': form})
     elif request.method == 'POST':
         if request.user.has_perm('nomina.change_empleados'):
             form = CrearempleadoForm(request.POST, instance=empleado)
@@ -720,7 +720,7 @@ def actualizar_empleado(request, empleado_id):
                     request, f"El empleado {empleado.nombre} ha sido actualizado correctamente")
                 return redirect('empleados')
             else:
-                return render(request, 'crear_empleados.html',
+                return render(request, 'actualizar_empleado.html',
                               {'empleado': empleado, 'form': form, 'error': "Error de datos"})
         else:
             return HttpResponseForbidden("No tiene permisos para editar un empleado.")
