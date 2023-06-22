@@ -1,17 +1,24 @@
 from django.db.models import Sum
+from django.http import JsonResponse
+from django.template.loader import render_to_string
+from django.views.generic.edit import CreateView
+from django_tables2 import SingleTableView
+from .tables import MovimientoTable, ItemTable
 from django.shortcuts import redirect, render
-from .forms import MovimientoForm
+from .forms import MovimientoForm, ItemForm
 from .models import Bodega, Item, Movimiento
 
 
 def home_operaciones2(request):
     return render(request, 'home_operaciones.html')
 
+
 def inventariotr(request):
     return render(request, 'inventariotr.html')
 
 
 def mover_item(request):
+    usuario = request.user
     if request.method == 'POST':
         form = MovimientoForm(request.POST)
         if form.is_valid():
@@ -28,11 +35,14 @@ def mover_item(request):
                                 item_destino.save()
                             except Item.DoesNotExist:
                                 Item.objects.create(numero_item=item.numero_item, kilos_netos=cantidad,
-                                                    bodega=bodega_destino)
+                                                    bodega=bodega_destino, fruta=item.fruta,
+                                                    tipo_negociacion=item.tipo_negociacion, user=usuario)
                         item.kilos_netos -= cantidad
                         item.save()
-                        movimiento = Movimiento(item_historico=item.numero_item, cantidad=cantidad, bodega_origen=item.bodega,
-                                                bodega_destino=bodega_destino)
+                        movimiento = Movimiento(item_historico=item.numero_item, cantidad=cantidad,
+                                                bodega_origen=item.bodega,
+                                                bodega_destino=bodega_destino, fruta=item.fruta,
+                                                t_negociacion=item.tipo_negociacion)
                         movimiento.save()
                         if item.kilos_netos == 0:
                             item.delete()
@@ -54,3 +64,42 @@ def mover_item(request):
             item.save()
     items = Item.objects.exclude(bodega__nombre="Salida Total").filter(kilos_netos__gt=0, bodega__isnull=False)
     return render(request, 'mover_item.html', {'form': form, 'items': items})
+
+
+class MovimientoListView(SingleTableView):
+    model = Movimiento
+    table_class = MovimientoTable
+    template_name = 'historico.html'
+
+
+class ItemListView(SingleTableView):
+    model = Item
+    table_class = ItemTable
+    template_name = 'recibo_items.html'
+
+    def get_queryset(self):
+        bodega_especifica = Bodega.objects.get(
+            nombre='Recibo')
+        return super().get_queryset().filter(bodega=bodega_especifica)
+
+
+class ItemCreateView(CreateView):
+    model = Item
+    form_class = ItemForm
+    template_name = 'crear_item.html'
+    success_url = '/items/'
+
+    def get_initial(self):
+        initial = super().get_initial()
+        bodega_predeterminada = Bodega.objects.get(
+            nombre='Recibo')
+        initial['bodega'] = bodega_predeterminada
+        return initial
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        return JsonResponse({'success': True})
+
+    def form_invalid(self, form):
+        return JsonResponse({'success': False, 'html': render_to_string(self.template_name, {'form': form})})

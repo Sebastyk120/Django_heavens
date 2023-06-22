@@ -4,7 +4,7 @@ from .models import Item, Bodega
 
 class MovimientoForm(forms.Form):
     item = forms.ModelChoiceField(queryset=Item.objects.exclude(bodega__nombre="Salida Total"))
-    cantidad = forms.IntegerField()
+    cantidad = forms.DecimalField()
     bodega_destino = forms.ModelChoiceField(queryset=Bodega.objects.exclude(id=1), required=False)
 
     def __init__(self, *args, **kwargs):
@@ -29,3 +29,15 @@ class MovimientoForm(forms.Form):
 
             if cantidad == item.kilos_netos and not bodega_destino:
                 raise forms.ValidationError("Debes seleccionar una bodega de destino para dar salida al item.")
+
+
+class ItemForm(forms.ModelForm):
+    class Meta:
+        model = Item
+        fields = ['numero_item', 'kilos_netos', 'fruta', 'bodega', 'tipo_negociacion']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        bodega_predeterminada = Bodega.objects.get(nombre='Recibo')
+        self.fields['bodega'].initial = bodega_predeterminada
+        self.fields['bodega'].disabled = True
