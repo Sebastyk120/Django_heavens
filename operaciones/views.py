@@ -3,9 +3,10 @@ from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.views.generic.edit import CreateView
 from django_tables2 import SingleTableView
-from .tables import MovimientoTable, ItemTable
+from django.utils import timezone
 from django.shortcuts import redirect, render
 from .forms import MovimientoForm, ItemForm
+from .tables import MovimientoTable, ItemTable
 from .models import Bodega, Item, Movimiento
 
 
@@ -87,18 +88,27 @@ class ItemCreateView(CreateView):
     model = Item
     form_class = ItemForm
     template_name = 'crear_item.html'
-    success_url = '/items/'
+    success_url = '/recibo_items/'
 
     def get_initial(self):
         initial = super().get_initial()
-        bodega_predeterminada = Bodega.objects.get(
-            nombre='Recibo')
+        bodega_predeterminada = Bodega.objects.get(nombre='Recibo')
         initial['bodega'] = bodega_predeterminada
         return initial
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        form.save()
+        item = form.save()
+        Movimiento.objects.create(
+            item_historico=item.numero_item,
+            cantidad=item.kilos_netos,
+            bodega_origen=item.bodega,
+            bodega_destino=item.bodega,
+            fruta=item.fruta.nombre_fruta,
+            t_negociacion=item.tipo_negociacion,
+            fecha=timezone.now(),
+            user=item.user
+        )
         return JsonResponse({'success': True})
 
     def form_invalid(self, form):

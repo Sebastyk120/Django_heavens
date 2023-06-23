@@ -9,7 +9,7 @@ class MovimientoTable(tables.Table):
         model = Movimiento
         template_name = "django_tables2/bootstrap5.html"
         fields = (
-            "item_historico", "cantidad", "bodega_origen", "bodega_destino", "fruta", "t_negociacion", "fecha")
+            "item_historico", "cantidad", "bodega_origen", "bodega_destino", "fruta", "t_negociacion", "fecha", "user")
 
 
 class ItemTable(tables.Table):

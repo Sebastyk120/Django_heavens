@@ -1,5 +1,5 @@
 from django import forms
-from .models import Item, Bodega
+from .models import Item, Bodega, Defectos
 
 
 class MovimientoForm(forms.Form):
@@ -32,6 +32,12 @@ class MovimientoForm(forms.Form):
 
 
 class ItemForm(forms.ModelForm):
+    """defectos = forms.MultipleChoiceField(
+        choices=[(defecto.nombre_defectos, defecto.nombre_defectos) for defecto in Defectos.objects.all()],
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )"""
+
     class Meta:
         model = Item
         fields = ['numero_item', 'kilos_netos', 'fruta', 'bodega', 'tipo_negociacion']
@@ -41,3 +47,12 @@ class ItemForm(forms.ModelForm):
         bodega_predeterminada = Bodega.objects.get(nombre='Recibo')
         self.fields['bodega'].initial = bodega_predeterminada
         self.fields['bodega'].disabled = True
+
+        """if self.instance and self.instance.defectos:
+            self.fields['defectos'].initial = self.instance.defectos.split(',')
+
+    def clean_defectos(self):
+        defectos = self.cleaned_data.get('defectos')
+        if defectos:
+            return ','.join(defectos)
+        return defectos"""

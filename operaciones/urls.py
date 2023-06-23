@@ -7,6 +7,6 @@ urlpatterns = [
     path('inventariotr/', views.inventariotr, name='inventariotr'),
     path('mover_item/', views.mover_item, name='mover_item'),
     path('historicos/', MovimientoListView.as_view(), name='historicos'),
-    path('items/', ItemListView.as_view(), name='item_list'),
+    path('recibo_items/', ItemListView.as_view(), name='recibo_items'),
     path('items/create/', ItemCreateView.as_view(), name='item_create'),
 ]
