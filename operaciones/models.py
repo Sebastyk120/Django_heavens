@@ -1,6 +1,5 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
-from django.utils import timezone
 from django.contrib.auth.models import User
 from .choices import negociacion, tipo_muestreo
 from nomina import models as modelos_nomina
@@ -62,7 +61,6 @@ class Item(models.Model):
     numero_remsion = models.IntegerField(verbose_name="Numero De Remision", null=True, blank=True)
     conductor = models.CharField(max_length=50, verbose_name="Conductor o Proveedor", null=True, blank=True)
     cedula_pro = models.IntegerField(verbose_name="Cedula Provedoor o Conductor", null=True, blank=True)
-    fecha = models.DateTimeField(default=timezone.now, verbose_name="Fecha Ingreso Recibo")
 
     def save(self, *args, **kwargs):
         update_fields = {}

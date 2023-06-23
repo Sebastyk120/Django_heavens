@@ -10,6 +10,7 @@
 </head>
 <h1>Items Recibo</h1>
 <body>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCreateItem" href="{% url 'item_create' %}">Crear Item</button>
 {% render_table table %}
 
 <!-- Modal -->

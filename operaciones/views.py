@@ -6,7 +6,7 @@ from django_tables2 import SingleTableView
 from django.utils import timezone
 from django.shortcuts import redirect, render
 from .forms import MovimientoForm, ItemForm
-from .tables import MovimientoTable, ItemTable
+from .tables import MovimientoTable, ItemTable, InventarioTable
 from .models import Bodega, Item, Movimiento
 
 
@@ -18,12 +18,28 @@ def inventariotr(request):
     return render(request, 'inventariotr.html')
 
 
-def mover_item(request):
-    usuario = request.user
-    if request.method == 'POST':
+class InventariorealTable(SingleTableView):
+    table_class = InventarioTable
+    queryset = Item.objects.exclude(bodega__nombre="Salida Total").filter(kilos_netos__gt=0, bodega__isnull=False)
+    template_name = 'mover_item.html'
+
+    def get_table_data(self):
+        data = super().get_table_data()
+        for bodega in Bodega.objects.all():
+            items_bodega = data.filter(bodega=bodega).distinct('numero_item')
+            for item in items_bodega:
+                cantidad_total = data.filter(numero_item=item.numero_item, bodega=bodega).aggregate(
+                    total=Sum('kilos_netos'))['total']
+                item.kilos_netos = cantidad_total
+                item.save()
+        return data
+
+    def post(self, request, *args, **kwargs):
         form = MovimientoForm(request.POST)
         if form.is_valid():
-            item = form.cleaned_data['item']
+            usuario = request.user
+            item_id = request.POST.get('item_id')  # Obtener el ID del item desde el formulario
+            item = Item.objects.get(id=item_id)
             cantidad = form.cleaned_data['cantidad']
             bodega_destino = form.cleaned_data['bodega_destino']
             if cantidad > 0:
@@ -43,36 +59,29 @@ def mover_item(request):
                         movimiento = Movimiento(item_historico=item.numero_item, cantidad=cantidad,
                                                 bodega_origen=item.bodega,
                                                 bodega_destino=bodega_destino, fruta=item.fruta,
-                                                t_negociacion=item.tipo_negociacion)
+                                                t_negociacion=item.tipo_negociacion, user=usuario)
                         movimiento.save()
                         if item.kilos_netos == 0:
                             item.delete()
-
-                    return redirect('mover_item')
+                        return redirect('mover_item')
+                    else:
+                        form.add_error('cantidad',
+                                       f"No hay suficiente stock disponible para dar salida a {cantidad} kilos netos.")
                 else:
-                    form.add_error('cantidad',
-                                   f"No hay suficiente stock disponible para dar salida a {cantidad} kilos netos.")
-            else:
-                form.add_error('cantidad', "La cantidad de kilos netos debe ser mayor que 0.")
-    else:
-        form = MovimientoForm()
-    for bodega in Bodega.objects.all():
-        items_bodega = Item.objects.filter(bodega=bodega).distinct('numero_item')
-        for item in items_bodega:
-            cantidad_total = Item.objects.filter(numero_item=item.numero_item, bodega=bodega).aggregate(
-                total=Sum('kilos_netos'))['total']
-            item.kilos_netos = cantidad_total
-            item.save()
-    items = Item.objects.exclude(bodega__nombre="Salida Total").filter(kilos_netos__gt=0, bodega__isnull=False)
-    return render(request, 'mover_item.html', {'form': form, 'items': items})
+                    form.add_error('cantidad', "La cantidad de kilos netos debe ser mayor que 0.")
+        self.object_list = self.get_table_data()
+        context = self.get_context_data()
+        return self.render_to_response(context)
 
 
+# Tabla De Historico De Movimientos. (Inventario Real)
 class MovimientoListView(SingleTableView):
     model = Movimiento
     table_class = MovimientoTable
     template_name = 'historico.html'
 
 
+# Mostrar Tabla Recibo - Bodega Recibo (Inventario Real)
 class ItemListView(SingleTableView):
     model = Item
     table_class = ItemTable
@@ -84,6 +93,7 @@ class ItemListView(SingleTableView):
         return super().get_queryset().filter(bodega=bodega_especifica)
 
 
+# Crear Tabla De Recibo - Crear Item - Modal (Inventario Real)
 class ItemCreateView(CreateView):
     model = Item
     form_class = ItemForm
