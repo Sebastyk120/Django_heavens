@@ -23,6 +23,10 @@ class InventariorealTable(SingleTableView):
     queryset = Item.objects.exclude(bodega__nombre="Salida Total").filter(kilos_netos__gt=0, bodega__isnull=False)
     template_name = 'mover_item.html'
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.object_list = None
+
     def get_table_data(self):
         data = super().get_table_data()
         for bodega in Bodega.objects.all():
