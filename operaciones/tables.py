@@ -23,11 +23,4 @@ class ItemTable(tables.Table):
         fields = ("numero_item", "kilos_netos", "fruta", "bodega", "tipo_negociacion", "user")
 
 
-# Aux Administrativo Movimientos (Inventario Real)
-class InventarioTable(tables.Table):
-    create = tables.TemplateColumn(template_name='mover_item_button.html', orderable=False, verbose_name='Mover Item')
 
-    class Meta:
-        model = Item
-        template_name = "django_tables2/bootstrap5.html"
-        fields = ("numero_item", "kilos_netos", "fruta", "bodega", "tipo_negociacion", "user")
