@@ -5,7 +5,7 @@ from .models import Item, Bodega, Defectos
 class MovimientoForm(forms.Form):
     item = forms.ModelChoiceField(queryset=Item.objects.exclude(bodega__nombre="Salida Total"))
     cantidad = forms.DecimalField()
-    bodega_destino = forms.ModelChoiceField(queryset=Bodega.objects.exclude(id=1), required=False)
+    bodega_destino = forms.ModelChoiceField(queryset=Bodega.objects.exclude(id=1), required=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

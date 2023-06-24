@@ -19,3 +19,16 @@ class ItemTable(tables.Table):
         model = Item
         template_name = "django_tables2/bootstrap5.html"
         fields = ("numero_item", "kilos_netos", "fruta", "bodega", "tipo_negociacion", "user")
+
+
+class InventariorealTable(tables.Table):
+    mover = tables.TemplateColumn(
+        template_name='mover_button.html',
+        orderable=False
+    )
+
+    class Meta:
+        model = Item
+        fields = ('numero_item', 'kilos_netos', 'bodega', 'fruta', 'tipo_negociacion', 'user',
+                  'mover')
+        attrs = {"class": "table"}

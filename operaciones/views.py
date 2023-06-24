@@ -6,7 +6,7 @@ from django_tables2 import SingleTableView
 from django.utils import timezone
 from django.shortcuts import redirect, render
 from .forms import MovimientoForm, ItemForm
-from .tables import MovimientoTable, ItemTable
+from .tables import MovimientoTable, ItemTable, InventariorealTable
 from .models import Bodega, Item, Movimiento
 
 
@@ -48,14 +48,19 @@ def mover_item(request):
                         if item.kilos_netos == 0:
                             item.delete()
 
-                    return redirect('mover_item')
+                        return JsonResponse({'success': True})
                 else:
                     form.add_error('cantidad',
                                    f"No hay suficiente stock disponible para dar salida a {cantidad} kilos netos.")
+                    return JsonResponse({'success': False, 'error': str(form.errors['cantidad'])})
+
             else:
                 form.add_error('cantidad', "La cantidad de kilos netos debe ser mayor que 0.")
+                return JsonResponse({'success': False, 'error': str(form.errors['cantidad'])})
+
     else:
         form = MovimientoForm()
+
     for bodega in Bodega.objects.all():
         items_bodega = Item.objects.filter(bodega=bodega).distinct('numero_item')
         for item in items_bodega:
@@ -63,8 +68,10 @@ def mover_item(request):
                 total=Sum('kilos_netos'))['total']
             item.kilos_netos = cantidad_total
             item.save()
+
     items = Item.objects.exclude(bodega__nombre="Salida Total").filter(kilos_netos__gt=0, bodega__isnull=False)
-    return render(request, 'mover_item.html', {'form': form, 'items': items})
+    table = InventariorealTable(items)
+    return render(request, 'mover_item.html', {'form': form, 'table': table})
 
 
 # Tabla De Historico De Movimientos. (Inventario Real)
