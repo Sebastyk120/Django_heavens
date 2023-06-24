@@ -6,7 +6,7 @@ from django_tables2 import SingleTableView
 from django.utils import timezone
 from django.shortcuts import redirect, render
 from .forms import MovimientoForm, ItemForm
-from .tables import MovimientoTable, ItemTable, InventarioTable
+from .tables import MovimientoTable, ItemTable
 from .models import Bodega, Item, Movimiento
 
 
@@ -18,32 +18,12 @@ def inventariotr(request):
     return render(request, 'inventariotr.html')
 
 
-class InventariorealTable(SingleTableView):
-    table_class = InventarioTable
-    queryset = Item.objects.exclude(bodega__nombre="Salida Total").filter(kilos_netos__gt=0, bodega__isnull=False)
-    template_name = 'mover_item.html'
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.object_list = None
-
-    def get_table_data(self):
-        data = super().get_table_data()
-        for bodega in Bodega.objects.all():
-            items_bodega = data.filter(bodega=bodega).distinct('numero_item')
-            for item in items_bodega:
-                cantidad_total = data.filter(numero_item=item.numero_item, bodega=bodega).aggregate(
-                    total=Sum('kilos_netos'))['total']
-                item.kilos_netos = cantidad_total
-                item.save()
-        return data
-
-    def post(self, request, *args, **kwargs):
+def mover_item(request):
+    usuario = request.user
+    if request.method == 'POST':
         form = MovimientoForm(request.POST)
         if form.is_valid():
-            usuario = request.user
-            item_id = request.POST.get('item_id')  # Obtener el ID del item desde el formulario
-            item = Item.objects.get(id=item_id)
+            item = form.cleaned_data['item']
             cantidad = form.cleaned_data['cantidad']
             bodega_destino = form.cleaned_data['bodega_destino']
             if cantidad > 0:
@@ -67,15 +47,24 @@ class InventariorealTable(SingleTableView):
                         movimiento.save()
                         if item.kilos_netos == 0:
                             item.delete()
-                        return redirect('mover_item')
-                    else:
-                        form.add_error('cantidad',
-                                       f"No hay suficiente stock disponible para dar salida a {cantidad} kilos netos.")
+
+                    return redirect('mover_item')
                 else:
-                    form.add_error('cantidad', "La cantidad de kilos netos debe ser mayor que 0.")
-        self.object_list = self.get_table_data()
-        context = self.get_context_data()
-        return self.render_to_response(context)
+                    form.add_error('cantidad',
+                                   f"No hay suficiente stock disponible para dar salida a {cantidad} kilos netos.")
+            else:
+                form.add_error('cantidad', "La cantidad de kilos netos debe ser mayor que 0.")
+    else:
+        form = MovimientoForm()
+    for bodega in Bodega.objects.all():
+        items_bodega = Item.objects.filter(bodega=bodega).distinct('numero_item')
+        for item in items_bodega:
+            cantidad_total = Item.objects.filter(numero_item=item.numero_item, bodega=bodega).aggregate(
+                total=Sum('kilos_netos'))['total']
+            item.kilos_netos = cantidad_total
+            item.save()
+    items = Item.objects.exclude(bodega__nombre="Salida Total").filter(kilos_netos__gt=0, bodega__isnull=False)
+    return render(request, 'mover_item.html', {'form': form, 'items': items})
 
 
 # Tabla De Historico De Movimientos. (Inventario Real)
