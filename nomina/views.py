@@ -21,6 +21,9 @@ def nomina_home(request):
 def home_nomina(request):
     return render(request, 'home_nomina.html')
 
+def registrohoras(request):
+    return render(request, 'registrohoras_home.html')
+
 
 def export_emp_excel(request):
     empleados_resource = EmpleadosResource()

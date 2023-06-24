@@ -19,13 +19,25 @@
 
 body {
     height: 100vh;
-    background-image: url(../img/fondojornadas.png);
+    background-image: url(../img/fondojornadasdark.png);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     font-family: 'Noto Sans Display', sans-serif;
 }
+
+.card {
+
+    background: rgba(255, 255, 255, 0.19);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8.9px);
+    -webkit-backdrop-filter: blur(8.9px);
+    border: 1px solid rgba(255, 255, 255, 0.26);
+    position: relative;
+    top: 30px;
+  }
 
 /*    PIE DE PAGINA     */
 
@@ -45,8 +57,7 @@ body {
 h1 {
     text-align: left;
     font-family: 'Noto Sans Display', sans-serif;
-    font-style: italic;
-    color: #003cff;
+    color: #e5e5e5;
     font-weight: bold;
 }
 
@@ -191,66 +202,47 @@ h1 {
     top: -2px;
     height: 40px;
     width: 120px;
-
-
-}
-
-.buttonv {
-
-    margin: 30px auto;
-    padding: 6px;
-    overflow: hidden;
-    border-width: 0;
+  
+  
+  }
+  
+  .buttonv {
+    font-family: 'Noto Sans Display', sans-serif;
+    text-align: center;
+    cursor: pointer;
     outline: none;
-    border-radius: 2px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
-    background-color: #c70000;
-    color: #ecf0f1;
-    transition: background-color .3s;
-}
-
-.buttonv:hover,
-.buttonv:focus {
-    background-color: #8327ae;
-}
-
-.buttonv>* {
-    position: relative;
-}
-
-.buttonv span {
-    display: block;
-    padding: 12px 24px;
-}
-
-.buttonv:before {
-    content: "";
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-
-    display: block;
-    width: 0;
-    padding-top: 0;
-
-    border-radius: 100%;
-
-    background-color: rgba(236, 240, 241, .3);
-
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-}
-
-.buttonv:active:before {
-    width: 120%;
-    padding-top: 120%;
-
-    transition: width .2s ease-out, padding-top .2s ease-out;
-}
+    overflow: hidden;
+    font-weight: 500;
+    color: #fff;
+    padding: 10px 28px;
+    text-decoration: none;
+  }
+  
+  .buttonv:hover {
+  
+    color: #fff;
+  
+  }
+  
+  
+  *,
+  *:before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: 0.5s;
+  }
+  
+  .btv {
+    border: none;
+    background-color: #ff0000;
+    box-shadow: 0 0 5px #ff0000;
+  }
+  
+  .btv:hover {
+    box-shadow: 0 0 10px #ef9797, 0 0 20px #ef9797, 0 0 20px #fdd1d1 inset;
+  }
 
 /*           MODELADO DE PAGINA RESPONSIVE          */
 
@@ -275,7 +267,7 @@ screen and (max-height: 900px) {
 
     body {
         height: 100vh;
-        background-image: url(../img/fondojornadas.png);
+        background-image: url(../img/fondojornadasdark.png);
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
@@ -436,70 +428,50 @@ screen and (max-height: 900px) {
     #volver {
 
         position: relative;
-        right: -350px;
+        right: -450px;
         top: -2px;
-        height: 35px;
-        width: 100px;
-
-
-    }
-
-    .buttonv {
-
-        margin: 30px auto;
-        padding: 6px;
-        overflow: hidden;
-        border-width: 0;
+        height: 40px;
+        width: 120px;
+    
+      }
+    
+      .buttonv {
+        font-family: 'Noto Sans Display', sans-serif;
+        text-align: center;
+        cursor: pointer;
         outline: none;
-        border-radius: 2px;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
-        background-color: #c70000;
-        color: #ecf0f1;
-        transition: background-color .3s;
-    }
-
-    .buttonv:hover,
-    .buttonv:focus {
-        background-color: #8327ae;
-    }
-
-    .buttonv>* {
-        position: relative;
-    }
-
-    .buttonv span {
-        display: block;
-        padding: 12px 24px;
-    }
-
-    .buttonv:before {
-        content: "";
-
-        position: absolute;
-        top: 50%;
-        left: 50%;
-
-        display: block;
-        width: 0;
-        padding-top: 0;
-
-        border-radius: 100%;
-
-        background-color: rgba(236, 240, 241, .3);
-
-        -webkit-transform: translate(-50%, -50%);
-        -moz-transform: translate(-50%, -50%);
-        -ms-transform: translate(-50%, -50%);
-        -o-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-    }
-
-    .buttonv:active:before {
-        width: 120%;
-        padding-top: 120%;
-
-        transition: width .2s ease-out, padding-top .2s ease-out;
-    }
+        overflow: hidden;
+        font-weight: 500;
+        color: #fff;
+        padding: 10px 28px;
+        text-decoration: none;
+      }
+    
+      .buttonv:hover {
+    
+        color: #fff;
+    
+      }
+    
+    
+      *,
+      *:before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        transition: 0.5s;
+      }
+    
+      .btv {
+        border: none;
+        background-color: #ff0000;
+        box-shadow: 0 0 5px #ff0000;
+      }
+    
+      .btv:hover {
+        box-shadow: 0 0 10px #ef9797, 0 0 20px #ef9797, 0 0 20px #fdd1d1 inset;
+      }
 
     /*      TAMAÑO DEL CARD AL REALIZAR EL MODELO RESPONSIVE    */
 

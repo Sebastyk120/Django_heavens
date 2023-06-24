@@ -2,7 +2,7 @@
     {% load crispy_forms_tags %}
     {% load static %}
     <!DOCTYPE html>
-    <html lang="es">
+    <html lang="es" data-bs-theme="dark">
     <head>
         <meta charset="UTF-8"/>
         <link rel="stylesheet" href="{% static 'css/Cempleado.css' %}"/>
@@ -14,7 +14,7 @@
         <div>
             <form action="{% url 'crear_empleado' %}" method="post" class="card card-body h-100 border-primary">
                 <div class="card-header">
-                    <h1 class="text-center mb-4">Crear Un Empleado</h1>
+                    <h1 class="text-center mb-4">Crear Empleado</h1>
                 </div>
                 <div class="card-body">
                     {{ error }} {% csrf_token %} {% crispy form %}

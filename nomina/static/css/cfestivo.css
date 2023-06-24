@@ -19,12 +19,24 @@
 
 body {
   height: 100vh;
-  background-image: url(../img/fondojornadas.png);
+  background-image: url(../img/fondojornadasdark.png);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   font-family: 'Noto Sans Display', sans-serif;
+}
+
+.card {
+
+  background: rgba(255, 255, 255, 0.19);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8.9px);
+  -webkit-backdrop-filter: blur(8.9px);
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  position: relative;
+  top: 30px;
 }
 
 /*         PIE DE PAGINA            */
@@ -45,8 +57,7 @@ body {
 h1 {
   text-align: left;
   font-family: 'Noto Sans Display', sans-serif;
-  font-style: italic;
-  color: #003cff;
+  color: #d3d3d3;
   font-weight: bold;
 }
 
@@ -240,7 +251,7 @@ screen and (max-height: 900px) {
 
   body {
     height: 100vh;
-    background-image: url(../img/fondojornadas.png);
+    background-image: url(../img/fondojornadasdark.png);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
