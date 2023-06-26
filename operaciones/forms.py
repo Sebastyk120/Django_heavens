@@ -3,7 +3,7 @@ from .models import Item, Bodega, Defectos
 
 
 class MovimientoForm(forms.Form):
-    item = forms.ModelChoiceField(queryset=Item.objects.exclude(bodega__nombre="Salida Total"))
+    item = forms.ModelChoiceField(queryset=Item.objects.exclude(bodega__nombre="Calidad"))
     cantidad = forms.DecimalField()
     bodega_destino = forms.ModelChoiceField(queryset=Bodega.objects.exclude(id=1), required=True)
 
@@ -21,14 +21,16 @@ class MovimientoForm(forms.Form):
 
         if item and cantidad:
             if cantidad > item.kilos_netos:
-                raise forms.ValidationError(
-                    f"Debes mover menos de ({item.kilos_netos}) kilos netos para el item {item}.")
+                self.add_error('cantidad',
+                               f"Debes mover menos de ({item.kilos_netos}) kilos netos para el item {item}.")
 
             if cantidad < 0:
-                raise forms.ValidationError("La cantidad de kilos a mover debe ser un número mayor a 0.")
+                self.add_error('cantidad', "La cantidad de kilos a mover debe ser un número mayor a 0.")
 
             if cantidad == item.kilos_netos and not bodega_destino:
-                raise forms.ValidationError("Debes seleccionar una bodega de destino para dar salida al item.")
+                self.add_error('bodega_destino', "Debes seleccionar una bodega de destino para dar salida al item.")
+
+        return cleaned_data
 
 
 class ItemForm(forms.ModelForm):

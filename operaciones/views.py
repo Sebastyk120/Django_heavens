@@ -1,10 +1,11 @@
+from turtledemo.penrose import f
 from django.db.models import Sum
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.views.generic.edit import CreateView
 from django_tables2 import SingleTableView
 from django.utils import timezone
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from .forms import MovimientoForm, ItemForm
 from .tables import MovimientoTable, ItemTable, InventariorealTable
 from .models import Bodega, Item, Movimiento
@@ -50,12 +51,12 @@ def mover_item(request):
 
                         return JsonResponse({'success': True})
                 else:
-                    form.add_error('cantidad',
-                                   f"No hay suficiente stock disponible para dar salida a {cantidad} kilos netos.")
+                    f.errors.as_json('cantidad',
+                                     f"No hay suficiente stock disponible para dar salida a {cantidad} kilos netos.")
                     return JsonResponse({'success': False, 'error': str(form.errors['cantidad'])})
 
             else:
-                form.add_error('cantidad', "La cantidad de kilos netos debe ser mayor que 0.")
+                f.errors.as_json('cantidad', "La cantidad de kilos netos debe ser mayor que 0.")
                 return JsonResponse({'success': False, 'error': str(form.errors['cantidad'])})
 
     else:
@@ -69,7 +70,7 @@ def mover_item(request):
             item.kilos_netos = cantidad_total
             item.save()
 
-    items = Item.objects.exclude(bodega__nombre="Salida Total").filter(kilos_netos__gt=0, bodega__isnull=False)
+    items = Item.objects.exclude(bodega__nombre="Calidad").filter(kilos_netos__gt=0, bodega__isnull=False)
     table = InventariorealTable(items)
     return render(request, 'mover_item.html', {'form': form, 'table': table})
 

@@ -25,6 +25,13 @@
             <form id="moverItemForm" method="post">
                 {% csrf_token %}
                 <div class="modal-body">
+                    <div id="errores">
+                        {% for field, error_list in form.errors.items %}
+                            {% for error in error_list %}
+                                <div class="alert alert-danger">{{ error }}</div>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
                     {{ form.as_p }}
                 </div>
                 <div class="modal-footer">
@@ -45,41 +52,36 @@
 
 <script>
     $(document).ready(function () {
-        
-        $('.mover-button').click(function () {
-            var itemId = $(this).data('item-id');
-            $('#id_item').val(itemId);
-            $('#moverItemModal').modal('show');
-        });
-
-        
-        $('#moverItemForm').on('submit', function (event) {
-            event.preventDefault();
-            $.ajax({
-                url: '/operaciones/mover_item/',
-                type: 'post',
-                data: $(this).serialize(),
-                success: function (data) {
-                    if (data.success) {
-                        $('#moverItemModal').modal('hide');
-                        location.reload();
-                    } else {
-                        $('.modal-body').prepend('<div class="alert alert-danger" id="errorAlert">' + data.error + '</div>');
-                        $('#errorAlert').text('Error en los datos');    
-                    }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log("AJAX Error: ", textStatus, errorThrown);
-                }
-            });
-            
-        });
-
-       
+    // Evento de clic para abrir el modal
+    $('.mover-button').click(function () {
+        var itemId = $(this).data('item-id');
+        $('#id_item').val(itemId);
+        $('#moverItemModal').modal('show');
     });
 
-    
+    // Manejador de envío de formulario con AJAX
+    $('#moverItemForm').on('submit', function (event) {
+        event.preventDefault();
+        $.ajax({
+            url: '/operaciones/mover_item/',
+            type: 'post',
+            data: $(this).serialize(),
+            success: function (data) {
+                if (data.success) {
+                    $('#moverItemModal').modal('hide');
+                    location.reload();
+                } else {
+                    console.log(data);
+                    var errorMessage = data.error;
+                    $('#errores').html('<div class="alert alert-danger">' + errorMessage + '</div>');
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("AJAX Error: ", textStatus, errorThrown);
+            }
+        });
+    });
+});
 </script>
-
 </body>
 </html>
