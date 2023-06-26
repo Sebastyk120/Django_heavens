@@ -7,10 +7,10 @@ body {
 }
 
 .container{
-
     position: absolute;
-    top: 200px;
+    top: 220px;
     display: grid;
+    left: 220px;
 }
 
 
@@ -22,6 +22,7 @@ body {
     cursor: pointer;
     transition: 0.4s;
     position: absolute;
+    margin-left: auto;
 
 }
 

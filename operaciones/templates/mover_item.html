@@ -21,18 +21,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="moverItemModalLabel">Mover Item</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
             <form id="moverItemForm" method="post">
                 {% csrf_token %}
                 <div class="modal-body">
-                    {% csrf_token %}
                     {{ form.as_p }}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     <button type="submit" class="btn btn-primary">Mover Item</button>
                 </div>
             </form>
@@ -68,15 +64,21 @@
                         $('#moverItemModal').modal('hide');
                         location.reload();
                     } else {
-                        $('.modal-body').prepend('<div class="alert alert-danger">' + data.error + '</div>');
+                        $('.modal-body').prepend('<div class="alert alert-danger" id="errorAlert">' + data.error + '</div>');
+                        $('#errorAlert').text('Error en los datos');    
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     console.log("AJAX Error: ", textStatus, errorThrown);
                 }
             });
+            
         });
+
+       
     });
+
+    
 </script>
 
 </body>

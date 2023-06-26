@@ -1,18 +1,11 @@
 {% extends 'ope_base.html' %} {% load static %} {% block content %}
 {% load crispy_forms_tags %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8"/>
     <title>Crear Jornada</title>
     <link rel="stylesheet" href="{% static 'css/Cjornada.css' %}"/>
-    <!-- Bootstrap CSS v5.2.1 -->
-    <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
-    crossorigin="anonymous"/>
-        <br>
 </head>
 <body>
     <br><br><br><br><br><br>
@@ -26,8 +19,8 @@
                     <div class="card-body">
                         {{ error }} {% csrf_token %} {% crispy form %} {{ Invalido }}
                         <div class="gap-5 col-2 mx-auto">
-                            <button class="btn btn-primary" id="guardar"> Guardar</button>
-                        <a class="buttonv btn btn-danger" href="{% url 'ope_home' %}" role="button" id="volver">Volver</a>
+                            <button class="custom-btn btn-1" id="guardar"> Guardar</button>
+                            <a class="custom-btn2 btn-2" href="{% url 'ope_home' %}" role="button" id="volver">Volver</a>
                         </div>
                     </div>
                 </form>

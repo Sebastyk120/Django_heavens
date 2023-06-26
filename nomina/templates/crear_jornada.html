@@ -1,25 +1,16 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
     {% load crispy_forms_tags %}
     <!DOCTYPE html>
-    <html lang="en">
+    <html lang="en" data-bs-theme="dark">
     <head>
         <meta charset="UTF-8"/>
         <title>Crear Jornada</title>
         <link rel="stylesheet" href="{% static 'css/Cjornada.css' %}"/>
-        <!-- Bootstrap CSS v5.2.1 -->
-        <link
-                href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-                rel="stylesheet"
-                integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
-                crossorigin="anonymous"
-        />
-        <!-- Bootstrap CSS v5.2.1 -->
         <br>
     </head>
     <body>
     <br><br><br><br><br><br>
     <main class="container">
-        <div class="row">
             <div>
                 <form action="{% url 'crear_jornada' %}" method="post" class="card card-body border-primary">
                     <div class="card-header">
@@ -34,7 +25,6 @@
                     </div>
                 </form>
             </div>
-        </div>
     </main>
     <div class="footer">
         <p>Heavens Fruit. - Todos los derechos reservados ©</p>
