@@ -65,7 +65,8 @@ def mover_item(request):
                 total=Sum('kilos_netos'))['total']
             item.kilos_netos = cantidad_total
             item.save()
-    items = Item.objects.exclude(bodega__nombre="Calidad").filter(kilos_netos__gt=0, bodega__isnull=False)
+    bodegas_excluidas = ["Devolucion", "Nacional", "Exportacion", "Perdida"]
+    items = Item.objects.exclude(bodega__nombre__in=bodegas_excluidas).filter(kilos_netos__gt=0, bodega__isnull=False)
     table = InventariorealTable(items)
     return render(request, 'mover_item.html', {'form': form, 'table': table})
 

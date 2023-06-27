@@ -55,13 +55,12 @@
     // Evento de clic para abrir el modal
     $('.mover-button').click(function () {
         var itemId = $(this).data('item-id');
-        $('#id_item').val(itemId);
+        $('#id_item').val(itemId).prop('disabled', true);
         $('#moverItemModal').modal('show');
     });
-
-    // Manejador de envío de formulario con AJAX
     $('#moverItemForm').on('submit', function (event) {
         event.preventDefault();
+        $('#id_item').prop('disabled', false);
         $.ajax({
             url: '/operaciones/items/mover/',
             type: 'post',
@@ -82,6 +81,7 @@
         });
     });
 });
+
 </script>
 </body>
 </html>

@@ -3,9 +3,11 @@ from .models import Item, Bodega, Defectos
 
 
 class MovimientoForm(forms.Form):
-    item = forms.ModelChoiceField(queryset=Item.objects.exclude(bodega__nombre="Calidad"))
+    bodegas_excluidas = ["Nacional", "Devolucion", "Exportacion", "Perdida"]
+    item = forms.ModelChoiceField(queryset=Item.objects.exclude(bodega__nombre__in=bodegas_excluidas))
     cantidad = forms.DecimalField()
-    bodega_destino = forms.ModelChoiceField(queryset=Bodega.objects.exclude(nombre="Recibo"), required=True)
+    bodegas_excluidas2 = ["Nacional", "Devolucion", "Exportacion", "Perdida", "Recibo"]
+    bodega_destino = forms.ModelChoiceField(queryset=Bodega.objects.exclude(nombre__in=bodegas_excluidas2), required=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
