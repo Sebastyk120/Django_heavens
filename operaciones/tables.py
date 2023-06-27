@@ -8,19 +8,18 @@ class MovimientoTable(tables.Table):
         model = Movimiento
         template_name = "django_tables2/bootstrap5.html"
         fields = (
-            "item_historico", "cantidad", "bodega_origen", "bodega_destino", "fruta", "t_negociacion", "fecha", "user")
+            "item_historico", "cantidad", "bodega_origen", "bodega_destino", "fruta", "t_negociacion", "fecha", "user",)
 
 
 # Recibo (Inventario Real)
 class ItemTable(tables.Table):
-    # create = tables.TemplateColumn(template_name='mover_item_button.html', orderable=False, verbose_name='Crear Item')
-
     class Meta:
         model = Item
         template_name = "django_tables2/bootstrap5.html"
         fields = ("numero_item", "kilos_netos", "fruta", "bodega", "tipo_negociacion", "user")
 
 
+# Base General de Items (Todos los Modulos)
 class InventariorealTable(tables.Table):
     mover = tables.TemplateColumn(
         template_name='mover_button.html',
@@ -29,6 +28,7 @@ class InventariorealTable(tables.Table):
 
     class Meta:
         model = Item
+        template_name = "django_tables2/bootstrap5.html"
         fields = ('numero_item', 'kilos_netos', 'bodega', 'fruta', 'tipo_negociacion', 'user',
                   'mover')
         attrs = {"class": "table"}

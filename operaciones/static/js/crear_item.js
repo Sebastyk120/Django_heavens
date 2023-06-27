@@ -5,15 +5,24 @@ $(document).ready(function() {
     });
 
     $("#modalCreateItem").on('submit', 'form', function(e) {
-        e.preventDefault();
+        e.preventDefault();//#modalCreateItem
 
         $.ajax({
             type: 'POST',
             url: $(this).attr('action'),
             data: $(this).serialize(),
-            success: function() {
-                $("#modalCreateItem").modal('hide');
-                location.reload(); // or update your table another way
+            success: function (data) {
+                if (data.success) {
+                    $('#modalCreateItem').modal('hide');
+                    location.reload();
+                } else {
+                    console.log(data);
+                    var errorMessage = data.error;
+                    $('#errores').html('<div class="alert alert-danger">' + errorMessage + '</div>');
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("AJAX Error: ", textStatus, errorThrown);
             }
         });
     });

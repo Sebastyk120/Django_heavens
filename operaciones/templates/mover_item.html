@@ -63,7 +63,7 @@
     $('#moverItemForm').on('submit', function (event) {
         event.preventDefault();
         $.ajax({
-            url: '/operaciones/mover_item/',
+            url: '/operaciones/items/mover/',
             type: 'post',
             data: $(this).serialize(),
             success: function (data) {

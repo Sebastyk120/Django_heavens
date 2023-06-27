@@ -108,7 +108,7 @@ class Item(models.Model):
 
 class Movimiento(models.Model):
     item_historico = models.CharField(max_length=100)
-    cantidad = models.DecimalField(max_digits=10, decimal_places=2)
+    cantidad = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Kilos Netos")
     bodega_origen = models.ForeignKey(Bodega, related_name='movimientos_salida', on_delete=models.CASCADE)
     bodega_destino = models.ForeignKey(Bodega, related_name='movimientos_entrada', on_delete=models.CASCADE)
     fruta = models.CharField(max_length=50)

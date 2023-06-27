@@ -5,7 +5,7 @@ from .models import Item, Bodega, Defectos
 class MovimientoForm(forms.Form):
     item = forms.ModelChoiceField(queryset=Item.objects.exclude(bodega__nombre="Calidad"))
     cantidad = forms.DecimalField()
-    bodega_destino = forms.ModelChoiceField(queryset=Bodega.objects.exclude(id=1), required=True)
+    bodega_destino = forms.ModelChoiceField(queryset=Bodega.objects.exclude(nombre="Recibo"), required=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -13,7 +13,7 @@ class MovimientoForm(forms.Form):
             item = self.initial['item']
             self.fields['cantidad'].initial = item.kilos_netos
 
-    def clean(self):
+    """def clean(self):
         cleaned_data = super().clean()
         item = cleaned_data.get('item')
         cantidad = cleaned_data.get('cantidad')
@@ -30,7 +30,7 @@ class MovimientoForm(forms.Form):
             if cantidad == item.kilos_netos and not bodega_destino:
                 self.add_error('bodega_destino', "Debes seleccionar una bodega de destino para dar salida al item.")
 
-        return cleaned_data
+        return cleaned_data"""
 
 
 class ItemForm(forms.ModelForm):
@@ -58,3 +58,8 @@ class ItemForm(forms.ModelForm):
         if defectos:
             return ','.join(defectos)
         return defectos"""
+
+
+# Boton (Buscar Item, historico de movimientos)
+class MovimientoSearchForm(forms.Form):
+    item_busqueda = forms.CharField(max_length=256, required=False)
