@@ -1,64 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 
-body {
+body{
 
     background-image: url(../img/fondojornadas.png);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    font-family: 'Montserrat';
-
 }
 
 h1 {
 
     justify-content: center;
     text-align: center;
-    font-family: 'Montserrat';
+    font-family: 'Montserrat'; 
     font-weight: 600;
     font-size: 46px;
 }
 
-label {
+label{
+
     font-family: 'Montserrat';
+    font-weight: 600;
 }
 
 
-[name="cantidad"] {
+[name="item_busqueda"]{
 
-
-    width: 100%;
+    width: 20%;
     border-radius: 4px;
     border: none;
     padding: 8px 12px;
-    background-color: #f1f1f1;
-    font-family: 'Montserrat';
-
-
-}
-
-[name="item"] {
-
-    width: 100%;
-    border-radius: 4px;
-    border: none;
-    padding: 8px 12px;
-    background-color: #f1f1f1;
+    background-color: #e4e4e4;
     font-family: 'Montserrat';
 
 }
 
-[name="bodega_destino"] {
 
-    width: 100%;
-    border-radius: 4px;
-    border: none;
-    padding: 8px 12px;
-    background-color: #f1f1f1;
-    font-family: 'Montserrat';
-
-}
 
 .table {
     border-collapse: collapse;
@@ -68,7 +46,7 @@ label {
     min-width: 400px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     background-color: rgb(255, 255, 255);
-    font-family: 'Montserrat';
+    font-family: 'Montserrat'; 
     font-weight: bold;
 }
 
@@ -76,21 +54,21 @@ label {
     background-color: #006098;
     color: #ffffff;
     text-align: left;
-
+    
 }
 
 .table thead tr {
     background-color: #006098;
     color: #ffffff;
     text-align: left;
-
+    
 }
 
 .table thead tr {
     background-color: #006098;
     color: #ffffff;
     text-align: left;
-
+    
 }
 
 .table tbody tr.active-row {
