@@ -592,6 +592,8 @@ screen and (max-height: 900px) {
             transform: translateY(0px);
         }
 
+    }
+    
     body {
         height: 100vh;
         background-image: url(../img/fondojornadas.png);

@@ -1,64 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 
 body {
-
     background-image: url(../img/fondojornadas.png);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    font-family: 'Montserrat';
-
 }
+
 
 h1 {
 
     justify-content: center;
     text-align: center;
     font-family: 'Montserrat';
-    font-weight: 600;
-    font-size: 46px;
+    font-weight: bold;
+    font-size: 102px;
 }
 
-label {
-    font-family: 'Montserrat';
-}
-
-
-[name="cantidad"] {
-
-
-    width: 100%;
-    border-radius: 4px;
-    border: none;
-    padding: 8px 12px;
-    background-color: #f1f1f1;
-    font-family: 'Montserrat';
-
-
-}
-
-[name="item"] {
-
-    width: 100%;
-    border-radius: 4px;
-    border: none;
-    padding: 8px 12px;
-    background-color: #f1f1f1;
-    font-family: 'Montserrat';
-
-}
-
-[name="bodega_destino"] {
-
-    width: 100%;
-    border-radius: 4px;
-    border: none;
-    padding: 8px 12px;
-    background-color: #f1f1f1;
-    font-family: 'Montserrat';
-
-}
 
 .table {
     border-collapse: collapse;
@@ -98,17 +57,17 @@ label {
     color: #006098;
 }
 
-A:link {
+a:link {
     color: rgb(255, 255, 255);
     text-decoration: none
 }
 
-A:hover {
+a:hover {
     color: rgb(255, 255, 255);
     text-decoration: none
 }
 
-A:visited {
+a:visited {
     color: rgb(243, 243, 243);
     text-decoration: none
 }

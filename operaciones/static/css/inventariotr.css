@@ -6,6 +6,13 @@ body {
     background-attachment: fixed;
 }
 
+.cards{
+
+    position: absolute;
+    top: 250px;
+
+}
+
 
 .card {
     width: 380px;
@@ -14,8 +21,7 @@ body {
     box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
     cursor: pointer;
     transition: 0.4s;
-    position: absolute;
-    top: 300px;
+    
 }
 
 
@@ -25,3 +31,11 @@ body {
         -5px -5px 30px 15px rgba(0, 0, 0, 0.13);
 }
 
+
+.volver{
+
+    position: absolute;
+    top: 650px;
+    left: 45%;
+
+}

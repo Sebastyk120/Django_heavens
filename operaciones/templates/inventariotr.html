@@ -16,9 +16,16 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
    </head>
   <body>
+    <a  class="volver" href="{% url 'home_operaciones2'%}">
+    <button class="btn btn-danger">
+      <i class="bi bi-arrow-left-circle-fill">
+      </i>
+      Volver
+    </button>
+  </a>
         <div class="row justify-content-md-center">
           <div class="col-xl-3 col-sm-4 col-5">
-            <a href="{% url 'recibo_items' %}">
+            <a class="cards" href="{% url 'recibo_items' %}">
             <div class="card">
               <div class="card-content">
                 <div class="card-body">
@@ -37,7 +44,7 @@
             </a>
           </div>
           <div class="col-xl-3 col-sm-5 col-5">
-            <a href="{% url 'item_mover' %}">
+            <a class="cards" href="{% url 'item_mover' %}">
             <div class="card">
               <div class="card-content">
                 <div class="card-body">
@@ -56,7 +63,7 @@
           </a>
           </div>
           <div class="col-xl-3 col-sm-5 col-5">
-            <a href="{% url 'historicos' %}">
+            <a class="cards" href="{% url 'historicos' %}">
             <div class="card">
               <div class="card-content">
                 <div class="card-body">
