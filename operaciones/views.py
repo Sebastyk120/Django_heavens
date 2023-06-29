@@ -125,7 +125,7 @@ class ItemCreateView(CreateView):
         kilos_netos = form.cleaned_data['kilos_netos']
 
         if Item.objects.filter(numero_item=numero_item).exclude(fruta=fruta).exists():
-            error_msg = f'Ya existe este Item {numero_item}, con fruta diferente.'
+            error_msg = f'Ya existe este Item {numero_item}, con fruta: {fruta}.'
             return JsonResponse({'success': False, 'error': error_msg})
 
         # Buscar el item existente en la misma bodega con el mismo numero_item y fruta

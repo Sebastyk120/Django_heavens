@@ -51,8 +51,13 @@ class ItemForm(forms.ModelForm):
         bodega_predeterminada = Bodega.objects.get(nombre='Recibo')
         self.fields['bodega'].initial = bodega_predeterminada
         self.fields['bodega'].disabled = True
+        self.fields['numero_item'].widget.attrs.update({'oninput': 'this.value = this.value.toUpperCase()'})
 
-        """if self.instance and self.instance.defectos:
+    def clean_numero_item(self):
+        numero_item = self.cleaned_data.get('numero_item')
+        return numero_item.upper()
+
+    """if self.instance and self.instance.defectos:
             self.fields['defectos'].initial = self.instance.defectos.split(',')
 
     def clean_defectos(self):
