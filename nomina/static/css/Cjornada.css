@@ -97,15 +97,6 @@ h1 {
 }
 
 
-*,
-*:before,
-*::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    transition: 0.5s;
-}
-
 .btn-2 {
     border: none;
     background-color: #ff0000;
@@ -132,10 +123,6 @@ screen and (max-height: 900px) {
 
     }
 
-    body {
-
-        font-size: 10px;
-
-    }
+    
 
 }

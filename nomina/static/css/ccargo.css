@@ -150,15 +150,6 @@ h1 {
 }
 
 
-*,
-*:before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  transition: 0.5s;
-}
-
 .bg {
   border: none;
   background-color: #1900ff;
@@ -198,15 +189,6 @@ h1 {
 
 }
 
-
-*,
-*:before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  transition: 0.5s;
-}
 
 .btv {
   border: none;
@@ -281,8 +263,7 @@ screen and (max-height: 900px) {
   h1 {
     text-align: left;
     font-family: 'Franklin Gothic Book';
-    font-style: italic;
-    color: #003cff;
+    color: #d3d3d3;
     font-weight: bold;
   }
 
@@ -377,15 +358,7 @@ screen and (max-height: 900px) {
   
   }
   
-  
-  *,
-  *:before,
-  *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    transition: 0.5s;
-  }
+
   
   .bg {
     border: none;
@@ -425,15 +398,6 @@ screen and (max-height: 900px) {
 
   }
 
-
-  *,
-  *:before,
-  *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    transition: 0.5s;
-  }
 
   .btv {
     border: none;

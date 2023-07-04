@@ -1,175 +1,258 @@
-body {
-  height: 100vh;
-  background-image: url(../img/fondomorado.png);
+.main-body {
+  background-color: #8e8e8e;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='1920' height='1080' preserveAspectRatio='none' viewBox='0 0 1920 1080'%3e%3cg mask='url(%26quot%3b%23SvgjsMask2541%26quot%3b)' fill='none'%3e%3crect width='1920' height='1080' x='0' y='0' fill='url(%26quot%3b%23SvgjsRadialGradient2542%26quot%3b)'%3e%3c/rect%3e%3cpath d='M0 0L952.41 0L0 264.06z' fill='rgba(255%2c 255%2c 255%2c .1)'%3e%3c/path%3e%3cpath d='M0 264.06L952.41 0L1481.84 0L0 342.99z' fill='rgba(255%2c 255%2c 255%2c .075)'%3e%3c/path%3e%3cpath d='M0 342.99L1481.84 0L1544.1599999999999 0L0 432.34000000000003z' fill='rgba(255%2c 255%2c 255%2c .05)'%3e%3c/path%3e%3cpath d='M0 432.34000000000003L1544.1599999999999 0L1559.2699999999998 0L0 807.33z' fill='rgba(255%2c 255%2c 255%2c .025)'%3e%3c/path%3e%3cpath d='M1920 1080L1059.04 1080L1920 656.75z' fill='rgba(0%2c 0%2c 0%2c .1)'%3e%3c/path%3e%3cpath d='M1920 656.75L1059.04 1080L903.47 1080L1920 428.07z' fill='rgba(0%2c 0%2c 0%2c .075)'%3e%3c/path%3e%3cpath d='M1920 428.06999999999994L903.47 1080L541.73 1080L1920 327.9599999999999z' fill='rgba(0%2c 0%2c 0%2c .05)'%3e%3c/path%3e%3cpath d='M1920 327.9599999999999L541.73 1080L321.58000000000004 1080L1920 311.30999999999995z' fill='rgba(0%2c 0%2c 0%2c .025)'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask2541'%3e%3crect width='1920' height='1080' fill='white'%3e%3c/rect%3e%3c/mask%3e%3cradialGradient cx='100%25' cy='0%25' r='2202.91' gradientUnits='userSpaceOnUse' id='SvgjsRadialGradient2542'%3e%3cstop stop-color='rgba(81%2c 19%2c 121%2c 1)' offset='0.53'%3e%3c/stop%3e%3cstop stop-color='rgba(52%2c 0%2c 65%2c 0.98)' offset='1'%3e%3c/stop%3e%3c/radialGradient%3e%3c/defs%3e%3c/svg%3e");
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
-  align-items: center;
-  justify-content: center;
-  background-attachment: fixed;
-  font-family: 'Noto Sans Display', sans-serif;
-  font-size: 15px;
+  animation: fadein 0.6s;
 }
 
+@keyframes fadein {
+  0% {
+      opacity:0;
+  }
+  10%{
+    opacity: 0.1;
+  }
+  20%{
+    opacity: 0.2;
+  }
+  30%{
+    opacity: 0.3;
+  }
+  40%{
+    opacity: 0.4;
+  }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  background: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 8px 0 rgba(124, 63, 136, 0.37);
-  backdrop-filter: blur(1.5px);
-  -webkit-backdrop-filter: blur(1px);
-  border: 1px solid rgb(255, 255, 255);
-  border-radius: 5px;
-  transition: 0.5s;
-}
-
-
-* {
-  margin: 0px;
-  padding: 0px;
-}
-
-#header {
-  margin: auto;
-  width: 100%;
-  font-family: 'Noto Sans Display', sans-serif;
-  ;
-}
-
-ul,
-ol {
-  list-style: none;
-}
-
-.nav {
-
-  justify-content: center;
-
-}
-
-.nav>li {
-  float: left
-}
-
-.nav li a {
-  color: #fff;
-  text-decoration: none;
-  padding: 10px 32px;
-  display: block;
-  transition: 0.5s;
-}
-
-.nav li a:hover {
-  background-color: #0000006b;
-  border-radius: 5px;
-}
-
-.nav li ul {
-  display: none;
-  position: absolute;
-  min-width: 140px;
-  z-index: 2;
-}
-
-.nav li:hover>ul {
-  display: block;
-}
-
-.nav li ul li {
-  position: relative;
-  z-index: 2;
-}
-
-.nav li ul li ul {
-  right: -175px;
-  top: 0px;
-  z-index: 2;
+  50%{
+      opacity:0.5;
+  }
+  60%{
+    opacity: 0.6;
+  }
+  70%{
+    opacity: 0.7;
+  }
+  80%{
+    opacity: 0.8;
+  }
+  90%{
+    opacity: 0.9;
+  }
+  100% {
+      opacity:1;
+  }
 }
 
 .container {
-
-  position: relative;
-  top: 100px;
-  z-index: -3;
-}
-.lastlog{
-
-  color: white;
-  justify-content: flex-end;
-
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 110px;
 }
 
-h2{
-  font-size: 45px;
-  display: block;
-  font-family: monospace;
-  white-space: nowrap; /* los espacios en blanco no rompen la línea */        
-  width: 4ch; /* el ancho será el número de caracteres que tiene nuestra línea */
-  animation: escribiendo 0.5s steps(4);          
+
+.icon-registro {
+  width: 90px; 
+  height: 90px;
+  border-radius: 8px;
+  background-image: url(../img/registro.png);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition-duration: 0.4s;
+  text-align: center;
+  line-height: 210px; 
+  text-overflow: ellipsis;
+  font-size: 12px;
+}
+
+.icon-ausentismos {
+  width: 90px; 
+  height: 90px;
+  border-radius: 8px;
+  background-image: url(../img/ausentismos.png);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition-duration: 0.4s;
+  text-align: center;
+  line-height: 210px; 
+  text-overflow: ellipsis;
+  font-size: 12px;
+}
+
+.icon-novedades {
+  width: 90px; 
+  height: 90px;
+  border-radius: 8px;
+  background-image: url(../img/novedades.png);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition-duration: 0.4s;
+  text-align: center;
+  line-height: 210px;
+  text-overflow: ellipsis;
+  font-size: 12px;
+}
+
+.icon-descuentos {
+  width: 90px; 
+  height: 90px;
+  border-radius: 8px;
+  background-image: url(../img/descuentos.png);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition-duration: 0.4s;
+  text-align: center;
+  line-height: 210px;
+  font-size: 12px;
+}
+
+.icon-inventariotr {
+  width: 90px; 
+  height: 90px;
+  border-radius: 8px;
+  background-image: url(../img/inventario.png);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition-duration: 0.4s;
+  text-align: center;
+  line-height: 210px; 
+  text-overflow: ellipsis;
+  font-size: 12px;
+}
+
+.icon-nacionales {
+  width: 90px; 
+  height: 90px;
+  border-radius: 8px;
+  background-image: url(../img/nacionales.png);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition-duration: 0.4s;
+  text-align: center;
+  line-height: 210px; 
+  text-overflow: ellipsis;
+  font-size: 12px;
+}
+
+.icon-porcentajes {
+  width: 90px; 
+  height: 90px;
+  border-radius: 8px;
+  background-image: url(../img/porcentajes.png);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition-duration: 0.4s;
+  text-align: center;
+  line-height: 210px; 
+  text-overflow: ellipsis;
+  font-size: 12px;
+}
+
+
+.icon-calidad {
+  width: 90px; 
+  height: 90px;
+  border-radius: 8px;
+  background-image: url(../img/calidad.png);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition-duration: 0.4s;
+  text-align: center;
+  line-height: 210px; 
+  text-overflow: ellipsis;
+  font-size: 12px;
+}
+
+.icon-tesoreria {
+  width: 90px; 
+  height: 90px;
+  border-radius: 8px;
+  background-image: url(../img/tesoreria.png);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition-duration: 0.4s;
+  text-align: center;
+  line-height: 210px; 
+  text-overflow: ellipsis;
+  font-size: 12px;
+}
+
+.icon-trasportes {
+  width: 90px; 
+  height: 90px;
+  border-radius: 8px;
+  background-image: url(../img/transporte.png);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition-duration: 0.4s;
+  text-align: center;
+  line-height: 210px; 
+  text-overflow: ellipsis;
+  font-size: 12px;
+}
+
+.icon-legalizaciones {
+  width: 90px; 
+  height: 90px;
+  border-radius: 8px;
+  background-image: url(../img/legalizaciones.png);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition-duration: 0.4s;
+  text-align: center;
+  line-height: 210px; 
+  text-overflow: ellipsis;
+  font-size: 12px;
+}
+
+.icon-logout {
+  width: 90px; 
+  height: 90px;
+  border-radius: 8px;
+  background-image: url(../img/logout.png);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition-duration: 0.4s;
+  text-align: center;
+  line-height: 210px; 
+  text-overflow: ellipsis;
+  font-size: 12px;
+}
+
+.icon-calidad:hover, .icon-ausentismos:hover, .icon-descuentos:hover, .icon-inventariotr:hover, .icon-legalizaciones:hover, .icon-nacionales:hover, .icon-novedades:hover, .icon-porcentajes:hover, .icon-registro:hover, .icon-tesoreria:hover, .icon-trasportes:hover, .icon-logout:hover{
+
+  box-shadow: 0 14px 18px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  color: rgba(0, 0, 0, 0);
+  font-family: arial;
+  text-decoration: none
+}
+
+span{
+  color: aliceblue;
   overflow: hidden;
-  color: white;
-}
-
-
-@keyframes escribiendo {
-  from {
-    width: 0;
-  }
-}
-
-.userlog {
-  font-size: xx-large;
-  display: block;
-  font-family: monospace;
-  white-space: nowrap; /* los espacios en blanco no rompen la línea */        
-  width: 51ch; /* el ancho será el número de caracteres que tiene nuestra línea */
-  animation: escribiendo 3s steps(51  );          
-  overflow: hidden;
-  color: white;
-}
-
-@keyframes escribiendo {
-  from {
-    width: 0;
-  }
-}
-
-.card {
-
-  background: rgba(255, 255, 255, 0.19);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(8.9px);
-  -webkit-backdrop-filter: blur(8.9px);
-  border: 1px solid rgba(255, 255, 255, 0.26);
-  z-index: -2;
-}
-
-.robot {
-
-  max-width: 400px;
-  animation: animate 5s linear infinite;
-  float: right;
-  
+  white-space: nowrap; 
 
 }
-
-@keyframes animate{
-
-  0%,100%
-  {
-    transform: translateY(25px);
-  }
-  50%
-  {
-    transform: translateY(50px);
-  }
-
-}
-
-/*      PIE DE PAGINA      */
 
 .footer {
   position: fixed;
@@ -183,7 +266,6 @@ h2{
   font-family: 'Noto Sans Display', sans-serif;
   font-size: 15px;
 }
-
 
 
 /*      Animacion Pre-Login     */

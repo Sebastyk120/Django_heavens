@@ -1,7 +1,8 @@
+{% extends 'opbase.html' %} {% block content %}
 {% load static %}
 {% load django_tables2 %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,15 +18,16 @@
   <br>
   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
     <button type="button" class="btn btn-primary me-md-5 btn-lg" id="add" data-bs-toggle="modal" data-bs-target="#modalCreateItem" href="{% url 'item_create' %}"><i class="bi bi-plus-square-fill"></i></button>
+    <a type="button" class="btn btn-danger me-md-5 btn-lg" role="button" href="{% url 'inventariotr' %}"><i class="bi bi-arrow-return-left"></i></a>    
   </div>
     <div class="container">
 {% render_table table %}
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="modalCreateItem" tabindex="-1" aria-labelledby="modalCreateItemLabel" aria-hidden="true">
+<div class="modal fade text-white " id="modalCreateItem" tabindex="-1" aria-labelledby="modalCreateItemLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content text-white bg-dark">
       <!-- Modal will be loaded here -->
     </div>
   </div>
@@ -36,3 +38,4 @@
 <script src="{% static 'js/crear_item.js' %}"></script>
 </body>
 </html>
+{% endblock %}

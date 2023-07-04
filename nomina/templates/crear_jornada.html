@@ -14,7 +14,7 @@
             <div>
                 <form action="{% url 'crear_jornada' %}" method="post" class="card card-body border-primary">
                     <div class="card-header">
-                        <h1 class="text-center mb-5">Ingresar Nueva Jornada</h1>
+                        <h1 class="text-center mb-5">Crear Nueva Jornada</h1>
                     </div>
                     <div class="card-body">
                         {{ error }} {% csrf_token %} {% crispy form %} {{ Invalido }}
