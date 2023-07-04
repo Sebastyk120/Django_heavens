@@ -7,6 +7,7 @@ body{
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    font-family: 'Montserrat';
 }
 
 h1 {
@@ -76,17 +77,24 @@ label{
     color: #006098;
 }
 
-A:link {
-    color: rgb(255, 255, 255);
+
+.nav-item{
+
+   color: #ffffff; 
+
+}
+
+a:link {
+    color: rgb(3, 3, 3);
     text-decoration: none
 }
 
-A:hover {
-    color: rgb(255, 255, 255);
+a:hover {
+    color: rgb(0, 0, 0);
     text-decoration: none
 }
 
-A:visited {
-    color: rgb(243, 243, 243);
+a:visited {
+    color: rgb(0, 0, 0);
     text-decoration: none
 }

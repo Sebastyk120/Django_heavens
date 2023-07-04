@@ -1,0 +1,31 @@
+body{
+
+    font-family: 'Montserrat';
+
+}
+
+
+.submenu{
+    position: absolute;
+    display: block;
+    width: 100%;
+    background: #006098;
+    float:inherit;
+}
+
+.submenu ul li{
+    display: block;
+    width: 100%;
+}
+
+.submenu{
+    position: absolute;
+    display: none; /* Cambiar sólo este valor */
+    width: 100%;
+    background: #006098;
+    float:inherit;
+}
+
+nav ul li:hover .submenu{
+    display: block;
+}

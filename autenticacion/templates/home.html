@@ -25,65 +25,49 @@
 
 {% if user.is_authenticated %}
 
-    <body>
-    <div id="header">
-        <ul class="nav">
-            <li><a href="">Tesoreria</a></li>
-            <li><a href="{% url 'nomina_home' %}">Nomina</a>
-                <ul>
-                    <li><a href="">Ausentismos</a></li>
-                    <li><a href="">Descuentos</a></li>
-                    <li><a href="">Novedades</a></li>
-                    <li><a href="">Registro Horas</a>
-                        <ul>
-                            <li><a href="{% url 'home_nomina' %}">Talento Humano</a>
-                                <ul>
-                                    <li><a href="{% url 'crear_empleado' %}">Crear Empleado</a></li>
-                                    <li><a href="{% url 'empleados' %}">Ver empleados</a></li>
-                                    <li><a href="{% url 'crear_jornada' %}">Ingresar Jornada</a></li>
-                                    <li><a href="{% url 'jornadas' %}">Ver Jornada</a></li>
-                                    <li><a href="{% url 'crear_festivo' %}">Festivos</a></li>
-                                    <li><a href="{% url 'crear_cargo' %}">Cargos</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="{% url 'ope_home' %}">Operaciones</a>
-                                <ul>
-                                    <li><a href="{% url 'ope_empleados' %}">Ver empleados</a></li>
-                                    <li><a href="{% url 'ope_crear_jornada' %}">Ingresar Jornadas</a></li>
-                                    <li><a href="{% url 'ope_jornadas' %}">Ver Jornada</a></li>
-                                    <li><a href="{% url 'ope_crear_festivo' %}">Festivos</a></li>
-                                    <li><a href="{% url 'ope_crear_cargo' %}">Cargos</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li><a href="{% url 'home_operaciones2' %}">Operaciones</a>
-                <ul>
-                    <li><a href="{% url 'inventariotr' %}">Inventario Tiempo Real</a></li>
-                    <li><a href="">Nacionales y Devoluciones</a></li>
-                    <li><a href="">Inventario de Salida</a></li>
-                    <li><a href="">Porcentajes de Muestreo</a></li>
-                </ul>
-            </li>
-            <li><a href="">Legalizaciones</a></li>
-            <li><a href="">Trasportes</a></li>
-            <li><a href={% url 'logout' %}>Salir</a></li>
-        </ul>
-    </div>
-    <div class="container">
-        <div class="card">
-            <div class="card-body">
-                <img class="robot" src={% static 'img/robot.png' %} aling="center">
-                <h2>Hola</h2>
-                <p class="userlog">{{ request.user.first_name }} Bienvenido a la aplicacion de Heavens</p>
-            </div>
+    <body class="main-body">
+        <br><br><br><br><br>
+        <div class="container">
+            <a class="icon-registro" href="{% url 'registrohoras' %}">
+                <span>Registro Horas</span>
+            </a>
+            <a class="icon-ausentismos" href="">
+                <span>Ausentismos</span>
+            </a>
+            <a class="icon-novedades" href="">
+                <span>Novedades</span>
+            </a>
+            <a class="icon-descuentos" href="">
+                <span>Descuentos</span>
+            </a>
+            <a class="icon-inventariotr" href="{% url 'inventariotr' %}">
+                <span>Inventario TR</span>
+            </a>
+            <a class="icon-nacionales" href="">
+                <span>Nacio y Devol</span>
+            </a>
+            <a class="icon-porcentajes" href="">
+                <span>Porcent Muestreo</span>
+            </a>
+            <a class="icon-calidad" href="">
+                <span>Inventario de Cal</span>
+            </a>
+            <a class="icon-tesoreria" href="">
+                <span>Tesoreria</span>
+            </a>
+            <a class="icon-trasportes" href="">
+                <span>Transportes</span>
+            </a>
+            <a class="icon-legalizaciones" href="">
+                <span>Legalizaciones</span>
+            </a>
+            <a class="icon-logout" href="{% url 'logout' %}">
+                <span>Cerrar Sesión</span>
+            </a>
         </div>
-        <p class="lastlog"> Su ultimo inicio de sesión fue: {{ request.user.last_login }}</p>
-    </div>
-
-
+          <div class="footer">
+            <p>Heavens Fruit. - Todos los derechos reservados ©</p>
+        </div>
     </body>
 
 {% else %}
@@ -119,7 +103,8 @@
     <div class="footer">
         <p>Heavens Fruit. - Todos los derechos reservados ©</p>
     </div>
-{% endif %}
 </body>
+{% endif %}
+
 
 </html>

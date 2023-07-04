@@ -106,14 +106,14 @@ img.crearempleado:hover {
 
 .grid {
     display: grid;
-    grid-template-columns: 400px 400px 400px;
+    grid-template-columns: 400px 400px 300px;
     grid-template-rows: 300px 300px 600px;
 }
 
 .container {
     position: absolute;
     top: 82%;
-    left: 55%;
+    left: 50%;
     transform: translate(-50%, -50%);
 
 }
