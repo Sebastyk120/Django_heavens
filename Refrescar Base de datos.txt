@@ -1,0 +1,18 @@
+
+Comando para arrancar el script.
+
+ ----- python manage.py shell -------
+
+ Script
+
+from django.db import connection
+from django.apps import apps
+
+with connection.cursor() as cursor:
+    for model in apps.get_models():
+        table = model._meta.db_table
+        # Verificar si el modelo tiene un campo 'id' session de Django no lo tiene normalmente.
+        if 'id' in [f.name for f in model._meta.get_fields()]:
+            cursor.execute(f"""
+                SELECT setval(pg_get_serial_sequence('{table}', 'id'), coalesce(max(id),0) + 1, false) FROM "{table}";
+            """)
