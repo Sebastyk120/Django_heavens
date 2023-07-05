@@ -11,9 +11,6 @@ from .models import Bodega, Item, Movimiento
 from .tables import MovimientoTable, ItemTable, InventariorealTable
 
 
-def home_operaciones2(request):
-    return render(request, 'home_operaciones.html')
-
 
 def inventariotr(request):
     return render(request, 'home_inventariotr.html')
