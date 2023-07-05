@@ -2,7 +2,7 @@ from django import forms
 from .models import Item, Bodega, Defectos
 
 
-class MovimientoForm(forms.Form):
+class InventarioRealForm(forms.Form):
     bodegas_excluidas = ["Nacional", "Devolucion", "Exportacion", "Perdida"]
     item = forms.ModelChoiceField(queryset=Item.objects.exclude(bodega__nombre__in=bodegas_excluidas))
     cantidad = forms.DecimalField()

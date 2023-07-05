@@ -17,8 +17,8 @@
   <h1>Items Recibo</h1>
   <br>
   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <button type="button" class="btn btn-primary me-md-5 btn-lg" id="add" data-bs-toggle="modal" data-bs-target="#modalCreateItem" href="{% url 'item_create' %}"><i class="bi bi-plus-square-fill"></i></button>
-    <a type="button" class="btn btn-danger me-md-5 btn-lg" role="button" href="{% url 'inventariotr' %}"><i class="bi bi-arrow-return-left"></i></a>    
+    <button type="button" class="btn btn-primary me-md-5 btn-lg" id="add" data-bs-toggle="modal" data-bs-target="#modalCreateItem" href="{% url 'reciboitemscreate' %}"><i class="bi bi-plus-square-fill"></i></button>
+    <a type="button" class="btn btn-danger me-md-5 btn-lg" role="button" href="{% url 'homeinventariotr' %}"><i class="bi bi-arrow-return-left"></i></a>
   </div>
     <div class="container">
 {% render_table table %}

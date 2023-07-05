@@ -1,13 +1,14 @@
 from django.db.models import Sum
 from django.http import JsonResponse
+from django.shortcuts import render
 from django.template.loader import render_to_string
+from django.utils import timezone
 from django.views.generic.edit import CreateView
 from django_tables2 import SingleTableView
-from django.utils import timezone
-from django.shortcuts import render
-from .forms import MovimientoForm, ItemForm, MovimientoSearchForm
-from .tables import MovimientoTable, ItemTable, InventariorealTable
+
+from .forms import InventarioRealForm, ItemForm, MovimientoSearchForm
 from .models import Bodega, Item, Movimiento
+from .tables import MovimientoTable, ItemTable, InventariorealTable
 
 
 def home_operaciones2(request):
@@ -19,10 +20,10 @@ def inventariotr(request):
 
 
 # Movimientos. (Inventario Real Aux Admin)
-def mover_item(request):
+def inventario_real(request):
     usuario = request.user
     if request.method == 'POST':
-        form = MovimientoForm(request.POST)
+        form = InventarioRealForm(request.POST)
         if form.is_valid():
             item = form.cleaned_data['item']
             cantidad = form.cleaned_data['cantidad']
@@ -57,7 +58,7 @@ def mover_item(request):
                 error_msg = "La cantidad de kilos netos debe ser mayor que 0."
                 return JsonResponse({'success': False, 'error': error_msg})
     else:
-        form = MovimientoForm()
+        form = InventarioRealForm()
     for bodega in Bodega.objects.all():
         items_bodega = Item.objects.filter(bodega=bodega).distinct('numero_item')
         for item in items_bodega:
@@ -66,9 +67,24 @@ def mover_item(request):
             item.kilos_netos = cantidad_total
             item.save()
     bodegas_excluidas = ["Devolucion", "Nacional", "Exportacion", "Perdida"]
-    items = Item.objects.exclude(bodega__nombre__in=bodegas_excluidas).filter(kilos_netos__gt=0, bodega__isnull=False)
+    items = Item.objects.exclude(bodega__nombre__in=bodegas_excluidas)
     table = InventariorealTable(items)
     return render(request, 'mover_item.html', {'form': form, 'table': table})
+
+
+# Prueba para inventario Real. -----------------------------------------////----------------------------------//class InventarioRealView(SingleTableMixin, ListView):
+
+class InventarioRealListView(SingleTableView):
+    model = Item
+    table_class = InventariorealTable
+    template_name = 'mover_item.html'
+
+    def get_queryset(self):
+        bodegas_excluidas = ["Devolucion", "Nacional", "Exportacion", "Perdida"]
+        return self.model.objects.exclude(bodega__nombre__in=bodegas_excluidas)
+
+
+# Prueba para inventario Real. -----------------------------------------////----------------------------------//
 
 
 # Tabla De Historico De Movimientos. (Inventario Real)
@@ -97,7 +113,7 @@ class MovimientoListView(SingleTableView):
 class ItemListView(SingleTableView):
     model = Item
     table_class = ItemTable
-    template_name = 'recibo_items.html'
+    template_name = 'recibo_items_list.html'
 
     def get_queryset(self):
         bodega_especifica = Bodega.objects.get(
@@ -109,7 +125,7 @@ class ItemListView(SingleTableView):
 class ItemCreateView(CreateView):
     model = Item
     form_class = ItemForm
-    template_name = 'crear_item.html'
+    template_name = 'recibo_crear_item.html'
     success_url = '/recibo_items/'
 
     def get_initial(self):
