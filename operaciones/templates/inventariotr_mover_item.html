@@ -69,7 +69,7 @@
         event.preventDefault();
         $('#id_item').prop('disabled', false);
         $.ajax({
-            url: '/operaciones/items/mover/',
+            url: '/operaciones/intentariotr_items_list',
             type: 'post',
             data: $(this).serialize(),
             success: function (data) {

@@ -16,7 +16,7 @@ def home_operaciones2(request):
 
 
 def inventariotr(request):
-    return render(request, 'inventariotr.html')
+    return render(request, 'home_inventariotr.html')
 
 
 # Movimientos. (Inventario Real Aux Admin)
@@ -69,7 +69,7 @@ def inventario_real(request):
     bodegas_excluidas = ["Devolucion", "Nacional", "Exportacion", "Perdida"]
     items = Item.objects.exclude(bodega__nombre__in=bodegas_excluidas)
     table = InventariorealTable(items)
-    return render(request, 'mover_item.html', {'form': form, 'table': table})
+    return render(request, 'inventariotr_mover_item.html', {'form': form, 'table': table})
 
 
 # Prueba para inventario Real. -----------------------------------------////----------------------------------//class InventarioRealView(SingleTableMixin, ListView):
@@ -77,7 +77,7 @@ def inventario_real(request):
 class InventarioRealListView(SingleTableView):
     model = Item
     table_class = InventariorealTable
-    template_name = 'mover_item.html'
+    template_name = 'inventariotr_mover_item.html'
 
     def get_queryset(self):
         bodegas_excluidas = ["Devolucion", "Nacional", "Exportacion", "Perdida"]

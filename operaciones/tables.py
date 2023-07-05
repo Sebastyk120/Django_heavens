@@ -22,7 +22,7 @@ class ItemTable(tables.Table):
 # Base General de Items (Todos los Modulos)
 class InventariorealTable(tables.Table):
     mover = tables.TemplateColumn(
-        template_name='mover_button.html',
+        template_name='inventariotr_mover_button.html',
         orderable=False
     )
 
