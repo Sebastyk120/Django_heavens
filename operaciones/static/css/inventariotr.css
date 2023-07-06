@@ -8,13 +8,18 @@ body {
     background-attachment: fixed;
 }
 
-.cards{
-
-    position: absolute;
-    top: 250px;
-
+.container {
+    display: grid;
+    grid-template-columns: 400px 400px 400px;
+    position: relative;
+    top: 220px
 }
 
+a{
+
+    position: rel;
+
+}
 
 .card {
     width: 380px;
@@ -23,7 +28,7 @@ body {
     box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
     cursor: pointer;
     transition: 0.4s;
-    
+
 }
 
 
@@ -34,7 +39,7 @@ body {
 }
 
 
-.volver{
+.volver {
 
     position: absolute;
     top: 650px;
@@ -55,26 +60,55 @@ body {
     font-size: 15px;
 }
 
-@media screen and (max-width: 1366px),
-screen and (max-height: 900px) {
+@media (max-width: 1180px) {
+
+
+    .container{
+
+        display: grid;
+        grid-template-columns: 300px 300px 300px;
+        position: relative;
+        gap: 10px;
+        top: 220px
+
+    }
 
     .card {
+
         width: 300px;
-        height: 150px;
+        height: 170px;
         border-radius: 40px;
         box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
         cursor: pointer;
         transition: 0.4s;
-        position: absolute;
-    
-    }
-    
-    
-    .card:hover {
-        transform: scale(0.95, 0.95);
-        box-shadow: 5px 5px 30px 15px rgba(0, 0, 0, 0.15),
-            -5px -5px 30px 15px rgba(0, 0, 0, 0.13);
+
     }
 
 }
 
+@media (max-width:768px) {
+    
+    .container{
+
+        display: grid;
+        grid-template-columns: 100px;
+        grid-template-rows: 200px;
+        position: relative;
+        top: 10px;
+        left: 10%;
+        gap: 10px;
+
+    }
+    .card{
+
+        width: 270px;
+        height: 160px;
+        border-radius: 40px;
+        box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
+        cursor: pointer;
+        transition: 0.4s;
+
+    }
+
+    }
+    

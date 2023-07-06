@@ -24,64 +24,57 @@
       Volver
     </button>
   </a>
-        <div class="row justify-content-md-center">
-          <div class="col-xl-3 col-sm-4 col-5">
-            <a class="cards" href="{% url 'reciboitemslist' %}">
-            <div class="card bg-secondary">
-              <div class="card-content">
-                <div class="card-body">
-                  <div class="media d-flex">
-                    <div class="align-self-center">
-                      <i class="bi bi-pencil primary font-large-2 float-left position-absolute top-50 start-50 translate-middle"></i>
-                    </div>
-                    <div class="media-body text-right">
-                      <h3>Ingreso</h3>
-                      <span>De Inventario</span>
-                    </div>
-                  </div>
-                </div>
+    <div class="container">
+      <div class="card bg-secondary text-white">
+        <a href="{% url 'reciboitemslist' %}">
+        <div class="card-content">
+          <div class="card-body">
+            <div class="media d-flex">
+              <div class="align-self-center">
+                <i class="bi bi-box-arrow-in-right primary font-large-2 float-left position-absolute top-50 start-50 translate-middle"></i>
+              </div>
+              <div class="media-body text-right">
+                <h3>Ingreso</h3>
+                <span>De Inventario</span>
               </div>
             </div>
-            </a>
           </div>
-          <div class="col-xl-3 col-sm-5 col-5">
-            <a class="cards" href="{% url 'inventariotrlist' %}">
-            <div class="card bg-secondary">
-              <div class="card-content">
-                <div class="card-body">
-                  <div class="media d-flex">
-                    <div class="align-self-center">
-                      <i class="bi bi-arrow-left-right warning font-large-2 float-left position-absolute top-50 start-50 translate-middle"></i>
-                    </div>
-                    <div class="media-body text-right">
-                      <h3>Movimientos</h3>
-                      <span>De Inventario</span>
-                    </div>
-                  </div>
-                </div>
+        </div>
+      </a>
+      </div>
+      <div class="card bg-secondary text-white">
+        <a href="{% url 'inventariotrlist' %}">
+        <div class="card-content">
+          <div class="card-body">
+            <div class="media d-flex">
+              <div class="align-self-center">
+                <i class="bi bi-file-text danger font-large-2 float-left position-absolute top-50 start-50 translate-middle"></i>
+              </div>
+              <div class="media-body text-right">
+                <h3>Movimiento</h3>
+                <span>De Inventario</span>
               </div>
             </div>
-          </a>
           </div>
-          <div class="col-xl-3 col-sm-5 col-5">
-            <a class="cards" href="{% url 'historicos' %}">
-            <div class="card bg-secondary">
-              <div class="card-content">
-                <div class="card-body">
-                  <div class="media d-flex">
-                    <div class="align-self-center">
-                      <i class="bi bi-file-text-fill danger font-large-2 float-left position-absolute top-50 start-50 translate-middle"></i>
-                    </div>
-                    <div class="media-body text-right">
-                      <h3>Historico</h3>
-                      <span>De Inventario</span>
-                    </div>
-                  </div>
-                </div>
+        </div>
+      </a>
+      </div>
+      <div class="card bg-secondary text-white">
+        <a href="{% url 'historicos' %}">
+        <div class="card-content">
+          <div class="card-body">
+            <div class="media d-flex">
+              <div class="align-self-center">
+                <i class="bi bi-arrow-left-right warning font-large-2 float-left position-absolute top-50 start-50 translate-middle"></i>
+              </div>
+              <div class="media-body text-right">
+                <h3>Historico</h3>
+                <span>De Inventario</span>
               </div>
             </div>
-          </a>
           </div>
+        </a>
+        </div>
       </div>
       <div class="footer">
         <p>Heavens Fruit. - Todos los derechos reservados ©</p>

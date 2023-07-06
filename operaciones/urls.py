@@ -3,7 +3,6 @@ from . import views
 from .views import MovimientoListView, ItemListView, ItemCreateView, InventarioRealListView
 
 urlpatterns = [
-    path("", views.home_operaciones2, name="home_operaciones2"),
     path('home_inventario_tr', views.inventariotr, name='homeinventariotr'),
     path('intentariotr_items_list', InventarioRealListView.as_view(), name='inventariotrlist'),
     path('historico_items', MovimientoListView.as_view(), name='historicos'),
