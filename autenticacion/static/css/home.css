@@ -259,7 +259,7 @@ a:link {
 a:visited {
   color: rgba(0, 0, 0, 0);
   font-family: arial;
-  text-decoration: none
+  text-decoration: none;
 }
 
 span{
@@ -419,3 +419,4 @@ h5 {
 .btn-1:hover {
   box-shadow: 0 0 10px #ef97e8, 0 0 20px #ef97e8, 0 0 20px #fff inset;
 }
+

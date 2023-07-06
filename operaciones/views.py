@@ -68,7 +68,7 @@ def inventario_real(request):
     return render(request, 'inventariotr_mover_item.html', {'form': form, 'table': table})
 
 
-# Prueba para inventario Real. -----------------------------------------////----------------------------------//class InventarioRealView(SingleTableMixin, ListView):
+# Prueba para inventario Real. -----------------------------------------////----------------------------------//:
 
 class InventarioRealListView(SingleTableView):
     model = Item
