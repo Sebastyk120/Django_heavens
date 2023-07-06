@@ -10,10 +10,13 @@ class InventarioRealForm(forms.Form):
     bodega_destino = forms.ModelChoiceField(queryset=Bodega.objects.exclude(nombre__in=bodegas_excluidas2), required=True)
 
     def __init__(self, *args, **kwargs):
+        kwargs.pop('instance', None)
         super().__init__(*args, **kwargs)
-        if self.initial.get('item'):
+        if 'item' in self.initial:
             item = self.initial['item']
             self.fields['cantidad'].initial = item.kilos_netos
+            self.fields['item'].queryset = self.fields['item'].queryset.filter(pk=item.pk)
+
 
     """def clean(self):
         cleaned_data = super().clean()

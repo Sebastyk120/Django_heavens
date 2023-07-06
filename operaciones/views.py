@@ -11,7 +11,6 @@ from .models import Bodega, Item, Movimiento
 from .tables import MovimientoTable, ItemTable, InventariorealTable
 
 
-
 def inventariotr(request):
     return render(request, 'home_inventariotr.html')
 
@@ -74,11 +73,65 @@ def inventario_real(request):
 class InventarioRealListView(SingleTableView):
     model = Item
     table_class = InventariorealTable
-    template_name = 'inventariotr_mover_item.html'
+    template_name = 'inventariotr_list_item.html'
 
     def get_queryset(self):
         bodegas_excluidas = ["Devolucion", "Nacional", "Exportacion", "Perdida"]
         return self.model.objects.exclude(bodega__nombre__in=bodegas_excluidas)
+
+
+class InventarioCreateView(CreateView):
+    model = Item
+    form_class = InventarioRealForm
+    template_name = 'inventariotr_mover_item.html'
+    success_url = '/intentariotr_items_list/'
+
+    def get(self, request, *args, **kwargs):
+        item_id = request.GET.get('item_id', None)
+        if item_id:
+            item = Item.objects.get(pk=item_id)
+            form = self.form_class(initial={'item': item})
+            return render(request, self.template_name, {'form': form})
+        return super().get(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        usuario = self.request.user
+        item = form.cleaned_data['item']
+        cantidad = form.cleaned_data['cantidad']
+        bodega_destino = form.cleaned_data['bodega_destino']
+        if cantidad > 0:
+            if cantidad <= item.kilos_netos and item.bodega != bodega_destino:
+                try:
+                    # Buscar el mismo Item y combinar los kilos en la misma bodega.
+                    existing_item = Item.objects.get(numero_item=item.numero_item, bodega=bodega_destino)
+                    existing_item.kilos_netos += cantidad
+                    existing_item.save()
+                except Item.DoesNotExist:
+                    Item.objects.create(numero_item=item.numero_item, kilos_netos=cantidad,
+                                        bodega=bodega_destino, fruta=item.fruta,
+                                        tipo_negociacion=item.tipo_negociacion, user=usuario)
+                item.kilos_netos -= cantidad
+                item.save()
+                movimiento = Movimiento(item_historico=item.numero_item, cantidad=cantidad,
+                                        bodega_origen=item.bodega,
+                                        bodega_destino=bodega_destino, fruta=item.fruta,
+                                        t_negociacion=item.tipo_negociacion, user=usuario)
+                movimiento.save()
+                if item.kilos_netos == 0:
+                    item.delete()
+                return JsonResponse({'success': True})
+            elif item.bodega == bodega_destino:
+                error_msg = f"La bodega de origen -> {item.bodega}, es igual a la bodega destino -> {bodega_destino}"
+                return JsonResponse({'success': False, 'error': error_msg})
+            else:
+                error_msg = f"No hay suficiente stock disponible para dar salida a {cantidad} kilos netos. Kilos Netos disponibles: {item.kilos_netos}"
+                return JsonResponse({'success': False, 'error': error_msg})
+        else:
+            error_msg = "La cantidad de kilos netos debe ser mayor que 0."
+            return JsonResponse({'success': False, 'error': error_msg})
+
+    def form_invalid(self, form):
+        return JsonResponse({'success': False, 'html': render_to_string(self.template_name, {'form': form})})
 
 
 # Prueba para inventario Real. -----------------------------------------////----------------------------------//
@@ -141,7 +194,7 @@ class ItemCreateView(CreateView):
             error_msg = f'Ya existe este Item {numero_item}, con fruta diferente, revise la fruta que esta ingresando: {fruta}.'
             return JsonResponse({'success': False, 'error': error_msg})
 
-        # Buscar el item existente en la misma bodega con el mismo numero_item y fruta
+        # Buscar el item igual en la misma bodega con el mismo numero_item y fruta
         try:
             existing_item = Item.objects.get(numero_item=numero_item, fruta=fruta, bodega=bodega)
             existing_item.kilos_netos += kilos_netos  # Sumar los kilos_netos
