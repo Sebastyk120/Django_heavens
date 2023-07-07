@@ -16,10 +16,9 @@ h1 {
     justify-content: center;
     text-align: center;
     font-family: 'Montserrat';
-    font-weight: 600;
-    font-size: 46px;
+    font-weight: bold;
+    font-size: 35px;
 }
-
 label {
     font-family: 'Montserrat';
 }
@@ -32,8 +31,9 @@ label {
     border-radius: 4px;
     border: none;
     padding: 8px 12px;
-    background-color: #f1f1f1;
+    background-color: #555555;
     font-family: 'Montserrat';
+    color: #f1f1f1;
 
 
 }
@@ -44,8 +44,9 @@ label {
     border-radius: 4px;
     border: none;
     padding: 8px 12px;
-    background-color: #f1f1f1;
+    background-color: #555555;
     font-family: 'Montserrat';
+    color: #f1f1f1;
 
 }
 
@@ -55,8 +56,29 @@ label {
     border-radius: 4px;
     border: none;
     padding: 8px 12px;
-    background-color: #f1f1f1;
+    background-color: #555555;
     font-family: 'Montserrat';
+    color: #f1f1f1;
+
+}
+
+[name="item_busqueda"]{
+
+    width: 25%;
+    border-radius: 4px;
+    border: none;
+    padding: 8px 12px;
+    background-color: #e0e0e0;
+    font-family: 'Montserrat';
+    margin: 5px;
+
+}
+
+[name="volver"]{
+
+    position: absolute;
+    display: flex;
+    left: 90%;
 
 }
 
