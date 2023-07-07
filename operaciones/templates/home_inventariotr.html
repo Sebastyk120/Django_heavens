@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Inventario Tiempo Real</title>
+    <link rel="icon"  href="{% static 'img/favicon.png' %}">
     <link rel="stylesheet" href="{% static 'css/inventariotr.css' %}"/>
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap-extended.min.css">
@@ -25,8 +26,7 @@
     </button>
   </a>
     <div class="container">
-      <div class="card bg-secondary text-white">
-        <a href="{% url 'reciboitemslist' %}">
+        <a href="{% url 'reciboitemslist' %}" class="card bg-secondary text-white">
         <div class="card-content">
           <div class="card-body">
             <div class="media d-flex">
@@ -41,9 +41,7 @@
           </div>
         </div>
       </a>
-      </div>
-      <div class="card bg-secondary text-white">
-        <a href="{% url 'inventariotrlist' %}">
+        <a href="{% url 'inventariotrlist' %}" class="card bg-secondary text-white">
         <div class="card-content">
           <div class="card-body">
             <div class="media d-flex">
@@ -58,9 +56,7 @@
           </div>
         </div>
       </a>
-      </div>
-      <div class="card bg-secondary text-white">
-        <a href="{% url 'historicos' %}">
+        <a href="{% url 'historicos' %}" class="card bg-secondary text-white">
         <div class="card-content">
           <div class="card-body">
             <div class="media d-flex">
@@ -73,8 +69,8 @@
               </div>
             </div>
           </div>
+          </div>
         </a>
-        </div>
       </div>
       <div class="footer">
         <p>Heavens Fruit. - Todos los derechos reservados ©</p>

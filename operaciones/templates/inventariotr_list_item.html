@@ -22,16 +22,13 @@
     <body>
     <br>
     <h1>Items en bodega</h1>
-    <br><br><br>
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a type="button" class="btn btn-danger me-md-5 btn-lg" role="button" href="{% url 'homeinventariotr' %}"><i
-                class="bi bi-arrow-return-left"></i></a>
-    </div>
     <form method="get">
         <div class="d-flex">
             {{ item_busqueda }}
             <div class="d-grid gap-2 d-md-flex justify-content-between">
                 <button class="btn btn-secondary" type="submit"><i class="bi bi-search"></i></button>
+                <a type="button" class="btn btn-danger me-md-5 btn-lg" name="volver" role="button" href="{% url 'homeinventariotr' %}"><i
+                    class="bi bi-arrow-return-left"></i></a>
             </div>
         </div>
     </form>
