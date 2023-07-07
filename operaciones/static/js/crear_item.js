@@ -1,10 +1,12 @@
-$(document).ready(function() {
-    $("#modalCreateItem").on('show.bs.modal', function(e) {
+$(document).ready(function () {
+    $("#modalCreateItem").on('show.bs.modal', function (e) {
         var link = $(e.relatedTarget);
         $(this).find(".modal-content").load(link.attr("href"));
     });
 
-    $("#modalCreateItem").on('submit', 'form', function(e) {
+    $(document).off('submit', '#modalCreateItem');
+
+    $("#modalCreateItem").on('submit', 'form', function (e) {
         e.preventDefault();//#modalCreateItem
 
         $.ajax({

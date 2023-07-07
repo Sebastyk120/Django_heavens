@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import JornadaListView
 
 
 urlpatterns = [
@@ -37,4 +38,5 @@ urlpatterns = [
     path('operaciones/empleados/lista/', views.ope_list_empleados, name='ope_lista_empleados'),
     path('operaciones/festivos/ver/', views.ope_crear_festivo, name='ope_crear_festivo'),
     path('operaciones/cargos/ver/', views.ope_crear_cargo, name='ope_crear_cargo'),
+    path('prueba', JornadaListView.as_view(), name='prueba'),
 ]

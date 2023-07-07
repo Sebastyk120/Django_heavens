@@ -6,7 +6,7 @@ from django.utils import timezone
 from django.views.generic.edit import CreateView
 from django_tables2 import SingleTableView
 
-from .forms import InventarioRealForm, ItemForm, MovimientoSearchForm
+from .forms import InventarioRealForm, ItemForm, SearchForm
 from .models import Bodega, Item, Movimiento
 from .tables import MovimientoTable, ItemTable, InventariorealTable
 
@@ -74,10 +74,21 @@ class InventarioRealListView(SingleTableView):
     model = Item
     table_class = InventariorealTable
     template_name = 'inventariotr_list_item.html'
+    form_class = SearchForm
 
     def get_queryset(self):
         bodegas_excluidas = ["Devolucion", "Nacional", "Exportacion", "Perdida"]
-        return self.model.objects.exclude(bodega__nombre__in=bodegas_excluidas)
+        queryset = self.model.objects.exclude(bodega__nombre__in=bodegas_excluidas)
+        form = self.form_class(self.request.GET)
+        if form.is_valid() and form.cleaned_data.get('item_busqueda'):
+            item_busqueda = form.cleaned_data.get('item_busqueda')
+            queryset = queryset.filter(numero_item__icontains=item_busqueda)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['item_busqueda'] = self.form_class(self.request.GET)
+        return context
 
 
 class InventarioCreateView(CreateView):
@@ -142,7 +153,7 @@ class MovimientoListView(SingleTableView):
     model = Movimiento
     table_class = MovimientoTable
     template_name = 'historico.html'
-    form_class = MovimientoSearchForm
+    form_class = SearchForm
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -164,11 +175,21 @@ class ItemListView(SingleTableView):
     model = Item
     table_class = ItemTable
     template_name = 'recibo_items_list.html'
+    form_class = SearchForm
 
     def get_queryset(self):
-        bodega_especifica = Bodega.objects.get(
-            nombre='Recibo')
-        return super().get_queryset().filter(bodega=bodega_especifica)
+        bodega_especifica = Bodega.objects.get(nombre='Recibo')
+        queryset = super().get_queryset().filter(bodega=bodega_especifica)
+        form = self.form_class(self.request.GET)
+        if form.is_valid() and form.cleaned_data.get('item_busqueda'):
+            item_busqueda = form.cleaned_data.get('item_busqueda')
+            queryset = queryset.filter(numero_item__icontains=item_busqueda)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['item_busqueda'] = self.form_class(self.request.GET)
+        return context
 
 
 # Crear Tabla De Recibo - Crear Item - Modal (Inventario Real)

@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import render, redirect, get_object_or_404
+from django_tables2 import SingleTableView
 from tablib import Dataset
 from .calc_horarios import Horarios
 from .forms import CrearjornadaForm, CrearempleadoForm, CrearfestivoForm, CrearcargoForm, OpeCrearjornadaForm
@@ -11,6 +12,7 @@ from .models import Jornada, Empleados, Cargos, Festivos, OpeJornada
 from .resources import EmpleadosResource, JornadasResource, CargosResource, FestivosResourse, OpeJornadasResource
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from .tables import JornadaTable
 
 
 # Create your views here.
@@ -18,8 +20,10 @@ from rest_framework.response import Response
 def nomina_home(request):
     return render(request, 'nomina_home.html')
 
+
 def home_nomina(request):
     return render(request, 'home_nomina.html')
+
 
 def registrohoras(request):
     return render(request, 'registrohoras_home.html')
@@ -1334,3 +1338,9 @@ def ope_crear_festivo(request):
 def ope_crear_cargo(request):
     cargos_nombre = Cargos.objects.values_list('cargo', flat=True)
     return render(request, 'ope_crear_cargo.html', {'cargos_nombre': cargos_nombre})
+
+
+class JornadaListView(SingleTableView):
+    model = Jornada
+    table_class = JornadaTable
+    template_name = 'prueba.html'

@@ -17,6 +17,14 @@
     <br>
     <h1>Items Recibo</h1>
     <br>
+    <form method="get">
+        <div class="d-flex">
+            {{ item_busqueda }}
+            <div class="d-grid gap-2 d-md-flex justify-content-between">
+                <button class="btn btn-secondary" type="submit"><i class="bi bi-search"></i></button>
+            </div>
+        </div>
+    </form>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <button type="button" class="btn btn-primary me-md-5 btn-lg" id="add" data-bs-toggle="modal"
                 data-bs-target="#modalCreateItem" href="{% url 'reciboitemscreate' %}"><i
@@ -37,12 +45,9 @@
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
             integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
-            integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
             crossorigin="anonymous"></script>
     <script src="{% static 'js/crear_item.js' %}"></script>
     </body>
