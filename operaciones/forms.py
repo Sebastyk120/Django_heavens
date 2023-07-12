@@ -58,7 +58,9 @@ class ItemForm(forms.ModelForm):
 
     def clean_numero_item(self):
         numero_item = self.cleaned_data.get('numero_item')
-        return numero_item.upper()
+        if numero_item:
+            numero_item = "R" + numero_item.upper()
+        return numero_item
 
     """if self.instance and self.instance.defectos:
             self.fields['defectos'].initial = self.instance.defectos.split(',')

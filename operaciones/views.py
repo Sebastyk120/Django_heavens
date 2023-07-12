@@ -1,4 +1,3 @@
-from django.db.models import Sum
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.template.loader import render_to_string
@@ -15,60 +14,7 @@ def inventariotr(request):
     return render(request, 'home_inventariotr.html')
 
 
-# Movimientos. (Inventario Real Aux Admin)
-def inventario_real(request):
-    usuario = request.user
-    if request.method == 'POST':
-        form = InventarioRealForm(request.POST)
-        if form.is_valid():
-            item = form.cleaned_data['item']
-            cantidad = form.cleaned_data['cantidad']
-            bodega_destino = form.cleaned_data['bodega_destino']
-            if cantidad > 0:
-                if cantidad <= item.kilos_netos and item.bodega != bodega_destino:
-                    try:
-                        item_destino = Item.objects.get(numero_item=item.numero_item, bodega=bodega_destino)
-                        item_destino.kilos_netos += cantidad
-                        item_destino.save()
-                    except Item.DoesNotExist:
-                        Item.objects.create(numero_item=item.numero_item, kilos_netos=cantidad,
-                                            bodega=bodega_destino, fruta=item.fruta,
-                                            tipo_negociacion=item.tipo_negociacion, user=usuario)
-                    item.kilos_netos -= cantidad
-                    item.save()
-                    movimiento = Movimiento(item_historico=item.numero_item, cantidad=cantidad,
-                                            bodega_origen=item.bodega,
-                                            bodega_destino=bodega_destino, fruta=item.fruta,
-                                            t_negociacion=item.tipo_negociacion, user=usuario)
-                    movimiento.save()
-                    if item.kilos_netos == 0:
-                        item.delete()
-                    return JsonResponse({'success': True})
-                elif item.bodega == bodega_destino:
-                    error_msg = f"La bodega de origen -> {item.bodega}, es igual a la bodega destino -> {bodega_destino}"
-                    return JsonResponse({'success': False, 'error': error_msg})
-                else:
-                    error_msg = f"No hay suficiente stock disponible para dar salida a {cantidad} kilos netos. Kilos Netos disponibles: {item.kilos_netos}"
-                    return JsonResponse({'success': False, 'error': error_msg})
-            else:
-                error_msg = "La cantidad de kilos netos debe ser mayor que 0."
-                return JsonResponse({'success': False, 'error': error_msg})
-    else:
-        form = InventarioRealForm()
-    for bodega in Bodega.objects.all():
-        items_bodega = Item.objects.filter(bodega=bodega).distinct('numero_item')
-        for item in items_bodega:
-            cantidad_total = Item.objects.filter(numero_item=item.numero_item, bodega=bodega).aggregate(
-                total=Sum('kilos_netos'))['total']
-            item.kilos_netos = cantidad_total
-            item.save()
-    bodegas_excluidas = ["Devolucion", "Nacional", "Exportacion", "Perdida"]
-    items = Item.objects.exclude(bodega__nombre__in=bodegas_excluidas)
-    table = InventariorealTable(items)
-    return render(request, 'inventariotr_mover_item.html', {'form': form, 'table': table})
-
-
-# Prueba para inventario Real. -----------------------------------------////----------------------------------//:
+# --------------------////-----------Movimientos. (Inventario Real Aux Admin)-----------------------//:
 
 class InventarioRealListView(SingleTableView):
     model = Item
@@ -77,7 +23,7 @@ class InventarioRealListView(SingleTableView):
     form_class = SearchForm
 
     def get_queryset(self):
-        bodegas_excluidas = ["Devolucion", "Nacional", "Exportacion", "Perdida"]
+        bodegas_excluidas = ["Devolucion", "Nacional", "Exportacion", "Perdida", "Calidad"]
         queryset = self.model.objects.exclude(bodega__nombre__in=bodegas_excluidas)
         form = self.form_class(self.request.GET)
         if form.is_valid() and form.cleaned_data.get('item_busqueda'):
@@ -91,6 +37,7 @@ class InventarioRealListView(SingleTableView):
         return context
 
 
+# ---------- Formulario Para Inventario en Tiempo Real -----------------------------------
 class InventarioCreateView(CreateView):
     model = Item
     form_class = InventarioRealForm
@@ -145,7 +92,7 @@ class InventarioCreateView(CreateView):
         return JsonResponse({'success': False, 'html': render_to_string(self.template_name, {'form': form})})
 
 
-# Prueba para inventario Real. -----------------------------------------////----------------------------------//
+# -----------------------------------------////----------------------------------//
 
 
 # Tabla De Historico De Movimientos. (Inventario Real)
@@ -192,7 +139,7 @@ class ItemListView(SingleTableView):
         return context
 
 
-# Crear Tabla De Recibo - Crear Item - Modal (Inventario Real)
+# -------------------------------  Formulario - Crear Item - Modal (Inventario Real) ----------------------------
 class ItemCreateView(CreateView):
     model = Item
     form_class = ItemForm
@@ -250,3 +197,5 @@ class ItemCreateView(CreateView):
 
     def form_invalid(self, form):
         return JsonResponse({'success': False, 'html': render_to_string(self.template_name, {'form': form})})
+
+# ////////------------------------------------- Porcentaje De Muestreo -------------------------////////
