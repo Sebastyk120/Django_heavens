@@ -11,7 +11,7 @@ body{
   overflow: hidden;
 }
 ::selection{
-  background: rgba(26,188,156,0.3);
+  background: rgba(156, 26, 188, 0.3);
 }
 .container{
   max-width: 440px;

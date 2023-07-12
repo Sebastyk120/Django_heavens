@@ -291,9 +291,7 @@ screen and (max-height: 900px) {
 
     h1 {
         text-align: left;
-        font-family: 'Noto Sans Display', sans-serif;
-        font-style: italic;
-        color: #003cff;
+        color: #ececec;
         font-weight: bold;
     }
 

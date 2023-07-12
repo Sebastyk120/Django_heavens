@@ -15,19 +15,21 @@ body {
     top: 220px
 }
 
-a{
 
-    position: rel;
-
-}
 
 .card {
     width: 380px;
     height: 190px;
-    border-radius: 40px;
+    border-radius: 4px;
     box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
     cursor: pointer;
     transition: 0.4s;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: black;
+    font-family: 'Montserrat';
 
 }
 
@@ -60,35 +62,42 @@ a{
     font-size: 15px;
 }
 
+/*           Desing Responsive  fot Tablet       */
+
 @media (max-width: 1180px) {
 
 
-    .container{
+    .container {
 
         display: grid;
         grid-template-columns: 300px 300px 300px;
         position: relative;
         gap: 10px;
         top: 220px
-
     }
 
     .card {
 
         width: 300px;
         height: 170px;
-        border-radius: 40px;
+        border-radius: 4px;
         box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
         cursor: pointer;
         transition: 0.4s;
+        justify-content: center;
+        background-color: white;
+        align-items: center;
+
 
     }
 
 }
 
+/*      Desing Responsive for Mobile        */
+
 @media (max-width:768px) {
-    
-    .container{
+
+    .container {
 
         display: grid;
         grid-template-columns: 100px;
@@ -99,16 +108,18 @@ a{
         gap: 10px;
 
     }
-    .card{
+
+    .card {
 
         width: 270px;
         height: 160px;
-        border-radius: 40px;
+        border-radius: 4px;
         box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
         cursor: pointer;
         transition: 0.4s;
+        justify-content: center;
+        background-color: white;
+        align-items: center;
 
     }
-
-    }
-    
+}

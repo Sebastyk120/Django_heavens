@@ -7,7 +7,10 @@
   background-size: cover;
   background-repeat: no-repeat;
   animation: fadein 0.6s;
+  font-family: 'Montserrat';
 }
+
+/*             Animación aparición de iconos tras 0.6s */
 
 @keyframes fadein {
   0% {
@@ -46,11 +49,14 @@
   }
 }
 
+/*      Grid Responsive     */
+
 .container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 110px;
 }
+
 
 .title{
   font-family: "Poppins";
@@ -59,6 +65,8 @@
   text-align: center;
 
 }
+
+/*      Custom Icons    */
 
 .icon-registro {
   width: 90px; 
@@ -269,6 +277,9 @@ span{
 
 }
 
+
+/*      Foot Of page   */
+
 .footer {
   position: fixed;
   left: 0;
@@ -283,7 +294,7 @@ span{
 }
 
 
-/*      Animacion Pre-Login     */
+/*      Animation Pre-Login     */
 
 body {
   margin: 0;
