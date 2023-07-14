@@ -2,7 +2,11 @@
     {% load static %}
     {% load django_tables2 %}
     <!DOCTYPE html>
+<<<<<<< HEAD
     <html lang="en">
+=======
+    <html lang="en"  data-bs-theme="dark">
+>>>>>>> b7f5c408a72c6bf41db92399e252dd7048570347
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +20,11 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
                 crossorigin="anonymous"></script>
+<<<<<<< HEAD
         <link rel="stylesheet" href="{% static 'css/mover_item.css' %}"/>
+=======
+        <link rel="stylesheet" href="{% static 'css/muestreo_list.css' %}"/>
+>>>>>>> b7f5c408a72c6bf41db92399e252dd7048570347
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     </head>
     <body>
@@ -28,16 +36,28 @@
             <div class="d-grid gap-2 d-md-flex justify-content-between">
                 <button class="btn btn-secondary" type="submit"><i class="bi bi-search"></i></button>
                 <a type="button" class="btn btn-danger me-md-5 btn-lg" name="volver" role="button"
+<<<<<<< HEAD
                    href="{% url 'homeinventariotr' %}"><i
+=======
+                   href="{% url 'homemuestreo' %}"><i
+>>>>>>> b7f5c408a72c6bf41db92399e252dd7048570347
                         class="bi bi-arrow-return-left"></i></a>
             </div>
         </div>
     </form>
+<<<<<<< HEAD
     <div class="container">
 
         {% render_table table %}
     </div>
     <!-- Mover Item Modal -->
+=======
+  
+<div class="container">
+        {% render_table table %}
+</div>   
+        <!-- Mover Item Modal -->
+>>>>>>> b7f5c408a72c6bf41db92399e252dd7048570347
     <div class="modal fade text-white" id="moverItemModal" tabindex="-1" role="dialog"
          aria-labelledby="moverItemModalLabel"
          aria-hidden="true">

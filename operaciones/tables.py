@@ -36,7 +36,11 @@ class InventariorealTable(tables.Table):
 
 # Base para muestreo de calidad.
 class MuestreoTable(tables.Table):
+<<<<<<< HEAD
     muestreo = tables.TemplateColumn(
+=======
+    mover = tables.TemplateColumn(
+>>>>>>> b7f5c408a72c6bf41db92399e252dd7048570347
         template_name='muestreo_muestra_button.html',
         orderable=False
     )

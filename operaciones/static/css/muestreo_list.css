@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 
-body{
+body {
 
     background-image: url(../img/fondojornadas.png);
     background-position: center;
@@ -8,32 +8,89 @@ body{
     background-repeat: no-repeat;
     background-attachment: fixed;
     font-family: 'Montserrat';
+
 }
 
 h1 {
 
     justify-content: center;
     text-align: center;
-    font-family: 'Montserrat'; 
-    font-weight: 600;
+    font-family: 'Montserrat';
+    font-weight: bold;
     font-size: 35px;
 }
-
-label{
-
+label {
     font-family: 'Montserrat';
-    font-weight: 600;
 }
 
 
-[name="item_busqueda"]{
+[name ="numero_item"]{
 
-    width: 20%;
+    width: 100%;
     border-radius: 4px;
     border: none;
     padding: 8px 12px;
-    background-color: #e4e4e4;
+    background-color: #e0e0e0;
     font-family: 'Montserrat';
+    margin: 5px;
+}
+
+[name="porcen_muestreo"]{
+
+    width: 100%;
+    border-radius: 4px;
+    border: none;
+    padding: 8px 12px;
+    background-color: #e0e0e0;
+    font-family: 'Montserrat';
+    margin: 5px;
+
+}
+
+[name="tipo_muestreo"]{
+
+    width: 100%;
+    border-radius: 4px;
+    border: none;
+    padding: 8px 12px;
+    background-color: #e0e0e0;
+    font-family: 'Montserrat';
+    margin: 5px;
+}
+
+[name="lider_muestreo"]{
+
+    width: 100%;
+    border-radius: 4px;
+    border: none;
+    padding: 8px 12px;
+    background-color: #e0e0e0;
+    font-family: 'Montserrat';
+    margin: 5px;
+
+}
+
+[name="emp_muestreo"]{
+
+    width: 100%;
+    border-radius: 4px;
+    border: none;
+    padding: 8px 12px;
+    background-color: #e0e0e0;
+    font-family: 'Montserrat';
+    margin: 5px;
+
+}
+
+[name="item_busqueda"]{
+
+    width: 25%;
+    border-radius: 4px;
+    border: none;
+    padding: 8px 12px;
+    background-color: #e0e0e0;
+    font-family: 'Montserrat';
+    margin: 5px;
 
 }
 
@@ -45,17 +102,14 @@ label{
 
 }
 
-/*          Custom Table Boostrap       */
-
 .table {
     border-collapse: collapse;
     margin: 25px 0;
     font-size: 0.9em;
     font-family: sans-serif;
-    min-width: 400px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     background-color: rgb(255, 255, 255);
-    font-family: 'Montserrat'; 
+    font-family: 'Montserrat';
     font-weight: bold;
 }
 
@@ -63,21 +117,21 @@ label{
     background-color: #006098;
     color: #ffffff;
     text-align: left;
-    
+
 }
 
 .table thead tr {
     background-color: #006098;
     color: #ffffff;
     text-align: left;
-    
+
 }
 
 .table thead tr {
     background-color: #006098;
     color: #ffffff;
     text-align: left;
-    
+
 }
 
 .table tbody tr.active-row {
@@ -85,25 +139,17 @@ label{
     color: #006098;
 }
 
-
-.nav-item{
-
-   color: #ffffff; 
-
-}
-
-a:link {
+A:link {
     color: rgb(255, 255, 255);
     text-decoration: none
 }
 
-a:hover {
+A:hover {
     color: rgb(255, 255, 255);
     text-decoration: none
 }
 
-a:visited {
-    color: rgb(255, 255, 255);
+A:visited {
+    color: rgb(243, 243, 243);
     text-decoration: none
 }
-

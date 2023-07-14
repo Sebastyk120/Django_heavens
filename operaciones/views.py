@@ -1,4 +1,8 @@
 from django.http import JsonResponse
+<<<<<<< HEAD
+=======
+from django.contrib import messages
+>>>>>>> b7f5c408a72c6bf41db92399e252dd7048570347
 from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
 from django.utils import timezone
@@ -12,6 +16,8 @@ from .tables import MovimientoTable, ItemTable, InventariorealTable, MuestreoTab
 def inventariotr(request):
     return render(request, 'home_inventariotr.html')
 
+def muestreo(request):
+    return render(request, 'home_muestreo.html')
 
 # --------------------////-----------Movimientos. (Inventario Real Aux Admin)-----------------------//:
 
@@ -74,9 +80,11 @@ class InventarioCreateView(CreateView):
                                         bodega_destino=bodega_destino, fruta=item.fruta,
                                         t_negociacion=item.tipo_negociacion, user=usuario)
                 movimiento.save()
+                messages.success(self.request, f'El item se movido exitosamente a la bodega {bodega_destino}.')
                 if item.kilos_netos == 0:
                     item.delete()
                 return JsonResponse({'success': True})
+                
             elif item.bodega == bodega_destino:
                 error_msg = f"La bodega de origen -> {item.bodega}, es igual a la bodega destino -> {bodega_destino}"
                 return JsonResponse({'success': False, 'error': error_msg})
@@ -86,6 +94,7 @@ class InventarioCreateView(CreateView):
         else:
             error_msg = "La cantidad de kilos netos debe ser mayor que 0."
             return JsonResponse({'success': False, 'error': error_msg})
+            
 
     def form_invalid(self, form):
         return JsonResponse({'success': False, 'html': render_to_string(self.template_name, {'form': form})})
@@ -192,6 +201,7 @@ class ItemCreateView(CreateView):
             fecha=timezone.now(),
             user=item.user
         )
+        messages.success(self.request, f'El item {numero_item} se ha creado exitosamente.')
         return JsonResponse({'success': True})
 
     def form_invalid(self, form):
@@ -292,7 +302,11 @@ class MuestreoHistoricoListView(SingleTableView):
         if form.is_valid():
             item_busqueda = form.cleaned_data.get('item_busqueda')
             if item_busqueda:
+<<<<<<< HEAD
                 queryset = queryset.filter(item_historico_muestreo__icontains=item_busqueda)
+=======
+                queryset = queryset.filter(item_historico__icontains=item_busqueda)
+>>>>>>> b7f5c408a72c6bf41db92399e252dd7048570347
         return queryset
 
     def get_context_data(self, **kwargs):
