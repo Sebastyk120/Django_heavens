@@ -292,7 +292,7 @@ class MuestreoHistoricoListView(SingleTableView):
         if form.is_valid():
             item_busqueda = form.cleaned_data.get('item_busqueda')
             if item_busqueda:
-                queryset = queryset.filter(item_historico__icontains=item_busqueda)
+                queryset = queryset.filter(item_historico_muestreo__icontains=item_busqueda)
         return queryset
 
     def get_context_data(self, **kwargs):
