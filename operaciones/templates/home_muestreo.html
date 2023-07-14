@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Inventario Tiempo Real</title>
     <link rel="icon"  href="{% static 'img/favicon.png' %}">
-    <link rel="stylesheet" href="{% static 'css/inventariotr.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/muestreo.css' %}"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
@@ -20,27 +20,20 @@
     </button>
   </a>
     <div class="container">
-        <a href="{% url 'reciboitemslist' %}" class="card">
+        <a href="{% url 'muestreoitemslist' %}" class="card">
           <div class="card-body">
-              <h3>INGRESO</h3>
-              <h5>DE INVENTARIO</h5>
-              <i class="bi bi-box-arrow-in-right" style="font-size: 3rem; color: rgb(100, 237, 123);"></i>
+              <h3>PORCENTAJE</h3>
+              <h5>DE MUESTREO</h5>
+              <i class="bi bi-percent" style="font-size: 3rem; color: rgb(100, 187, 237);"></i>
         </div>
       </a>
-      <a href="{% url 'inventariotrlist' %}" class="card">
+      <a href="{% url 'historicos_muestreo' %}" class="card">
         <div class="card-body">
-            <h3>MOVIMIENTOS</h3>
-            <h5>DE INVENTARIO</h5>
-            <i class="bi bi-arrow-left-right"  style="font-size: 3rem; color: cornflowerblue;"></i>
+            <h3>HISTORICO</h3>
+            <h5>DE MUESTREO</h5>
+            <i class="bi bi-file-text"  style="font-size: 3rem; color: rgb(237, 100, 100);"></i>
       </div>
     </a>
-    <a href="{% url 'historicos' %}" class="card">
-      <div class="card-body">
-          <h3>HISTORICO</h3>
-          <h5>DE INVENTARIO</h5>
-          <i class="bi bi-file-text" style="font-size: 3rem; color: rgb(237, 100, 100); float:left;"></i>
-    </div>
-  </a>
       
       <div class="footer">
         <p>Heavens Fruit. - Todos los derechos reservados ©</p>

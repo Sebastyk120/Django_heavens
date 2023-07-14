@@ -7,7 +7,8 @@ class InventarioRealForm(forms.Form):
     item = forms.ModelChoiceField(queryset=Item.objects.exclude(bodega__nombre__in=bodegas_excluidas))
     cantidad = forms.DecimalField()
     bodegas_excluidas2 = ["Nacional", "Devolucion", "Exportacion", "Perdida", "Recibo"]
-    bodega_destino = forms.ModelChoiceField(queryset=Bodega.objects.exclude(nombre__in=bodegas_excluidas2), required=True)
+    bodega_destino = forms.ModelChoiceField(queryset=Bodega.objects.exclude(nombre__in=bodegas_excluidas2),
+                                            required=True)
 
     def __init__(self, *args, **kwargs):
         kwargs.pop('instance', None)
@@ -16,7 +17,6 @@ class InventarioRealForm(forms.Form):
             item = self.initial['item']
             self.fields['cantidad'].initial = item.kilos_netos
             self.fields['item'].queryset = self.fields['item'].queryset.filter(pk=item.pk)
-
 
     """def clean(self):
         cleaned_data = super().clean()
@@ -72,6 +72,14 @@ class ItemForm(forms.ModelForm):
         return defectos"""
 
 
-# Boton (Buscar Item, historico de movimientos)
+# Boton (Buscar Item, todos los modulos.)
 class SearchForm(forms.Form):
     item_busqueda = forms.CharField(max_length=256, required=False)
+
+
+# Formulario De Muestreo Porcentajes
+class MuestreoForm(forms.ModelForm):
+    class Meta:
+        model = Item
+        fields = ['numero_item', 'porcen_muestreo', 'tipo_muestreo', 'lider_muestreo', 'emp_muestreo']
+

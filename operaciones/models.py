@@ -49,8 +49,10 @@ class Item(models.Model):
     fruta = models.ForeignKey(Fruta, on_delete=models.CASCADE)
     bodega = models.ForeignKey(Bodega, on_delete=models.CASCADE, default='Recibo')
     tipo_negociacion = models.CharField(max_length=50, choices=negociacion, verbose_name="Tipo De Negociacion")
-    porcen_muestreo = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)], null=True, blank=True)
-    tipo_muestreo = models.CharField(max_length=50, choices=tipo_muestreo, verbose_name="Tipo De Muestreo", null=True, blank=True)
+    porcen_muestreo = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)], null=True,
+                                          blank=True)
+    tipo_muestreo = models.CharField(max_length=50, choices=tipo_muestreo, verbose_name="Tipo De Muestreo", null=True,
+                                     blank=True)
     lider_muestreo = models.CharField(max_length=50, verbose_name="Lider De Muestreo", null=True, blank=True)
     emp_muestreo = models.IntegerField(verbose_name="Cantidad Empaque Muestreo", null=True, blank=True)
     tip_empaque = models.ForeignKey(Empaque, on_delete=models.SET_NULL, null=True, blank=True)
@@ -118,3 +120,17 @@ class Movimiento(models.Model):
 
     def __str__(self):
         return f"{self.item_historico} - {self.cantidad} - {self.bodega_origen} - {self.bodega_destino} - {self.fecha}"
+
+
+class Movimientosmuestreo(models.Model):
+    item_historico_muestreo = models.CharField(max_length=100)
+    porcentaje_muestreo = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)],
+                                              verbose_name="Porcentaje Muestreado")
+    tipo_muestreo = models.CharField(max_length=50, verbose_name="Tipo Muestreo")
+    lider_muestreo = models.CharField(max_length=50, verbose_name="Lider De Muestreo")
+    empaque_muestreo = models.CharField(max_length=50, verbose_name="Cantidad Empaque Muestreo")
+    fecha = models.DateTimeField(auto_now_add=True, verbose_name="Fecha Muestreo")
+    user = models.ForeignKey(User, null=False, on_delete=models.CASCADE, verbose_name="Usuario")
+
+    def __str__(self):
+        return f"{self.item_historico_muestreo} - {self.porcentaje_muestreo} - {self.tipo_muestreo}"
