@@ -1,5 +1,5 @@
 import django_tables2 as tables
-from .models import Movimiento, Item
+from .models import Movimiento, Item, Movimientosmuestreo
 
 
 # Historicos (Inventario Real).
@@ -32,3 +32,26 @@ class InventariorealTable(tables.Table):
         fields = ('numero_item', 'kilos_netos', 'bodega', 'fruta', 'tipo_negociacion', 'user',
                   'mover')
         attrs = {"class": "table"}
+
+
+# Base para muestreo de calidad.
+class MuestreoTable(tables.Table):
+    mover = tables.TemplateColumn(
+        template_name='muestreo_muestra_button.html',
+        orderable=False
+    )
+
+    class Meta:
+        model = Item
+        template_name = "django_tables2/bootstrap5.html"
+        fields = ('numero_item', 'kilos_netos', 'bodega', 'fruta', 'tipo_negociacion', 'user',
+                  'porcen_muestreo', 'tipo_muestreo', 'lider_muestreo', 'emp_muestreo')
+        attrs = {"class": "table"}
+
+
+# Base historico de muestreo.
+
+class MovimientoMuestreoTable(tables.Table):
+    class Meta:
+        model = Movimientosmuestreo
+        template_name = "django_tables2/bootstrap5.html"

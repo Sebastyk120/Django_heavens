@@ -1,13 +1,12 @@
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
 from django.utils import timezone
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django_tables2 import SingleTableView
-
-from .forms import InventarioRealForm, ItemForm, SearchForm
-from .models import Bodega, Item, Movimiento
-from .tables import MovimientoTable, ItemTable, InventariorealTable
+from .forms import InventarioRealForm, ItemForm, SearchForm, MuestreoForm
+from .models import Bodega, Item, Movimiento, Movimientosmuestreo
+from .tables import MovimientoTable, ItemTable, InventariorealTable, MuestreoTable, MovimientoMuestreoTable
 
 
 def inventariotr(request):
@@ -198,4 +197,105 @@ class ItemCreateView(CreateView):
     def form_invalid(self, form):
         return JsonResponse({'success': False, 'html': render_to_string(self.template_name, {'form': form})})
 
+
 # ////////------------------------------------- Porcentaje De Muestreo -------------------------////////
+
+class MuestreoListView(SingleTableView):
+    model = Item
+    table_class = MuestreoTable
+    template_name = 'muestreo_list_item.html'
+    form_class = SearchForm
+
+    def get_queryset(self):
+        bodegas_excluidas = ["Devolucion", "Nacional", "Exportacion", "Perdida", "Calidad"]
+        queryset = self.model.objects.exclude(bodega__nombre__in=bodegas_excluidas)
+        form = self.form_class(self.request.GET)
+        if form.is_valid() and form.cleaned_data.get('item_busqueda'):
+            item_busqueda = form.cleaned_data.get('item_busqueda')
+            queryset = queryset.filter(numero_item__icontains=item_busqueda)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['item_busqueda'] = self.form_class(self.request.GET)
+        return context
+
+
+class MuestreoCreateView(UpdateView):
+    model = Item
+    form_class = MuestreoForm
+    template_name = 'muestreo_muestra_item.html'
+    success_url = '/muestreo_items/'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.object = None
+
+    def get_object(self, queryset=None):
+        item_id = self.request.POST.get('item_id')
+        item = get_object_or_404(Item, id=item_id)
+        return item
+
+    def get(self, request, *args, **kwargs):
+        item_id = request.GET.get('item_id')
+        self.object = get_object_or_404(Item, id=item_id)
+        form = self.form_class(instance=self.object)
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            form_html = render_to_string(self.template_name, {'form': form}, request=request)
+            return JsonResponse({'form': form_html})
+        else:
+            return super().get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.form_class(request.POST, instance=self.object)
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        item = form.save()
+        Movimientosmuestreo.objects.create(
+            item_historico_muestreo=item.numero_item,
+            porcentaje_muestreo=item.porcen_muestreo,
+            tipo_muestreo=item.tipo_muestreo,
+            lider_muestreo=item.lider_muestreo,
+            empaque_muestreo=item.emp_muestreo,
+            fecha=timezone.now(),
+            user=item.user
+        )
+        if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            return JsonResponse({'success': True})
+        else:
+            return super().form_valid(form)
+
+    def form_invalid(self, form):
+        if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            return JsonResponse({'success': False, 'html': render_to_string(self.template_name, {'form': form})})
+        else:
+            return super().form_invalid(form)
+
+
+# Ver historicos de muestreo
+
+class MuestreoHistoricoListView(SingleTableView):
+    model = Movimientosmuestreo
+    table_class = MovimientoMuestreoTable
+    template_name = 'historico_muestreo.html'
+    form_class = SearchForm
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        form = self.form_class(self.request.GET)
+        if form.is_valid():
+            item_busqueda = form.cleaned_data.get('item_busqueda')
+            if item_busqueda:
+                queryset = queryset.filter(item_historico__icontains=item_busqueda)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['item_busqueda'] = self.form_class(self.request.GET)
+        return context
