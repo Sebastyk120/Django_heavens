@@ -12,8 +12,10 @@ from .tables import MovimientoTable, ItemTable, InventariorealTable, MuestreoTab
 def inventariotr(request):
     return render(request, 'home_inventariotr.html')
 
+
 def muestreo(request):
     return render(request, 'home_muestreo.html')
+
 
 # --------------------////-----------Movimientos. (Inventario Real Aux Admin)-----------------------//:
 
@@ -80,7 +82,7 @@ class InventarioCreateView(CreateView):
                 if item.kilos_netos == 0:
                     item.delete()
                 return JsonResponse({'success': True})
-                
+
             elif item.bodega == bodega_destino:
                 error_msg = f"La bodega de origen -> {item.bodega}, es igual a la bodega destino -> {bodega_destino}"
                 return JsonResponse({'success': False, 'error': error_msg})
@@ -90,7 +92,6 @@ class InventarioCreateView(CreateView):
         else:
             error_msg = "La cantidad de kilos netos debe ser mayor que 0."
             return JsonResponse({'success': False, 'error': error_msg})
-            
 
     def form_invalid(self, form):
         return JsonResponse({'success': False, 'html': render_to_string(self.template_name, {'form': form})})

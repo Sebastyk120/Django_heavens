@@ -11,4 +11,5 @@ urlpatterns = [
     path('historico_muestreo_items', views.MuestreoHistoricoListView.as_view(), name='historicos_muestreo'),
     path('muestreo_items_list', views.MuestreoListView.as_view(), name='muestreoitemslist'),
     path('muestreo_items_create', views.MuestreoCreateView.as_view(), name='muestreoitemscreate'),
+    path('home_muestreo', views.muestreo, name='homemuestreo')
 ]
