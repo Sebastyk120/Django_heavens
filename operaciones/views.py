@@ -1,8 +1,4 @@
 from django.http import JsonResponse
-<<<<<<< HEAD
-=======
-from django.contrib import messages
->>>>>>> b7f5c408a72c6bf41db92399e252dd7048570347
 from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
 from django.utils import timezone
@@ -302,11 +298,7 @@ class MuestreoHistoricoListView(SingleTableView):
         if form.is_valid():
             item_busqueda = form.cleaned_data.get('item_busqueda')
             if item_busqueda:
-<<<<<<< HEAD
                 queryset = queryset.filter(item_historico_muestreo__icontains=item_busqueda)
-=======
-                queryset = queryset.filter(item_historico__icontains=item_busqueda)
->>>>>>> b7f5c408a72c6bf41db92399e252dd7048570347
         return queryset
 
     def get_context_data(self, **kwargs):
