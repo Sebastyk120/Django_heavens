@@ -39,14 +39,33 @@
               <li class="nav-item">
                 <a class="nav-link" href="">Inventario De Calidad</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'homemuestreo' %}">Porcentajes De Muestreo</a>
-              </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="{% url 'homemuestreo' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Porcentaje de Muestreo
+                  </a>
+                  <div class="submenu">
+                      <ul>
+                         <li><a href="{% url 'muestreoitemslist' %}">Muestreo</a></li>
+                         <li><a href="{% url 'historicos_muestreo' %}">Historico</a></li>
+                      </ul>
+                   </div>
+                </li>
             </ul>
             <div class="nav-item dropdown">
-              <a class="nav-link  text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown"  data-bs-auto-close="outside" id="navbarDropdown" aria-expanded="false">
                   <i class="bi bi-person-circle"></i> {{ request.user.first_name }}
               </a>
+              <ul class="dropdown-menu">
+                <li><div class="card" style="width: 13.5rem;">
+                  <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-person-square"></i></i></i> HEAVENS FRUIT SAS</h5>
+                    <br>
+                    <h6 class="card-subtitle mb-2"> {{ request.user.first_name }} {{ request.user.last_name }}</h6>
+                    <p class="card-text" style="font-size:12px;">{{ request.user.email }}</p>      
+                  </div>
+                </div></li>
+                <li><a class="dropdown-item" style="--bs-dropdown-link-active-bg: #a1a5abc9" href="{% url 'logout' %}">Cerrar Sesión <i class="bi bi-box-arrow-left"></i> </a></li>
+              </ul>
           </div>
           </div>
         </div>
