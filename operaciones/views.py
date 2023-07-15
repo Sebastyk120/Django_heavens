@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
 from django.utils import timezone
@@ -9,7 +10,8 @@ from .forms import InventarioRealForm, ItemForm, SearchForm, MuestreoForm
 from .models import Bodega, Item, Movimiento, Movimientosmuestreo
 from .tables import MovimientoTable, ItemTable, InventariorealTable, MuestreoTable, MovimientoMuestreoTable
 
-
+@login_required
+@permission_required('operaciones.view_movimiento', raise_exception=True)
 def inventariotr(request):
     return render(request, 'home_inventariotr.html')
 
@@ -274,6 +276,7 @@ class MuestreoCreateView(UpdateView):
             fecha=timezone.now(),
             user=item.user
         )
+        messages.success(self.request, 'El item se muestreo correctamente.')
         if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
             return JsonResponse({'success': True})
         else:
