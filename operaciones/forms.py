@@ -83,3 +83,8 @@ class MuestreoForm(forms.ModelForm):
         model = Item
         fields = ['numero_item', 'porcen_muestreo', 'tipo_muestreo', 'lider_muestreo', 'emp_muestreo']
 
+    def __init__(self, *args, **kwargs):
+        super(MuestreoForm, self).__init__(*args, **kwargs)
+        self.fields['numero_item'].widget.attrs['disabled'] = True
+
+
