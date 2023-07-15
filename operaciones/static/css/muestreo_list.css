@@ -8,6 +8,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     font-family: 'Montserrat';
+    min-height: 100%;
 
 }
 
@@ -111,31 +112,33 @@ label {
     background-color: rgb(255, 255, 255);
     font-family: 'Montserrat';
     font-weight: bold;
+    text-align: center;
 }
 
 .table thead tr {
     background-color: #006098;
     color: #ffffff;
-    text-align: left;
-
-}
-
-.table thead tr {
-    background-color: #006098;
-    color: #ffffff;
-    text-align: left;
+    text-align: center;
 
 }
 
 .table thead tr {
     background-color: #006098;
     color: #ffffff;
-    text-align: left;
+    text-align: center;
+
+}
+
+.table thead tr {
+    background-color: #006098;
+    color: #ffffff;
+    text-align: center;
 
 }
 
 .table tbody tr.active-row {
     font-weight: bold;
+    text-align: center;
     color: #006098;
 }
 
