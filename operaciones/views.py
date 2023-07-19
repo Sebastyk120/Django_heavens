@@ -285,7 +285,8 @@ class MuestreoCreateView(UpdateView):
 
     def form_invalid(self, form):
         if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
-            return JsonResponse({'success': False, 'html': render_to_string(self.template_name, {'form': form})})
+            return JsonResponse(
+                {'success': False, 'html': render_to_string(self.template_name, {'form': form}, request=self.request)})
         else:
             return super().form_invalid(form)
 
