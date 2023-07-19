@@ -10,6 +10,7 @@ from .forms import InventarioRealForm, ItemForm, SearchForm, MuestreoForm
 from .models import Bodega, Item, Movimiento, Movimientosmuestreo
 from .tables import MovimientoTable, ItemTable, InventariorealTable, MuestreoTable, MovimientoMuestreoTable
 
+
 @login_required
 @permission_required('operaciones.view_movimiento', raise_exception=True)
 def inventariotr(request):
@@ -276,7 +277,7 @@ class MuestreoCreateView(UpdateView):
             fecha=timezone.now(),
             user=item.user
         )
-        messages.success(self.request, 'El item se muestreo correctamente.')
+        # messages.success(self.request, 'El item se muestreo correctamente.')
         if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
             return JsonResponse({'success': True})
         else:

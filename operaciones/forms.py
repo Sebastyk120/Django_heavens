@@ -85,6 +85,6 @@ class MuestreoForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(MuestreoForm, self).__init__(*args, **kwargs)
-        self.fields['numero_item'].widget.attrs['disabled'] = True
+        self.fields['numero_item'].widget.attrs['readonly'] = True
 
 
