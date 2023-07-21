@@ -17,6 +17,7 @@ body{
 .submenu ul li{
     display: block;
     width: 100%;
+    z-index: 99;
 }
 
 .submenu{
@@ -25,6 +26,7 @@ body{
     width: 100%;
     background: #006098;
     float:inherit;
+    z-index: 99;
 }
 
 nav ul li:hover .submenu{

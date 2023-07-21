@@ -277,7 +277,7 @@ class MuestreoCreateView(UpdateView):
             fecha=timezone.now(),
             user=item.user
         )
-        # messages.success(self.request, 'El item se muestreo correctamente.')
+        messages.success(self.request, 'El item se muestreo correctamente.')
         if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
             return JsonResponse({'success': True})
         else:
