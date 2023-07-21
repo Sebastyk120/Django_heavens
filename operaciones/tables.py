@@ -6,7 +6,7 @@ from .models import Movimiento, Item, Movimientosmuestreo
 class MovimientoTable(tables.Table):
     class Meta:
         model = Movimiento
-        template_name = "django_tables2/bootstrap5.html"
+        template_name = "django_tables2/bootstrap5-responsive.html"
         fields = (
             "item_historico", "cantidad", "bodega_origen", "bodega_destino", "fruta", "t_negociacion", "fecha", "user",)
 
@@ -15,7 +15,7 @@ class MovimientoTable(tables.Table):
 class ItemTable(tables.Table):
     class Meta:
         model = Item
-        template_name = "django_tables2/bootstrap5.html"
+        template_name = "django_tables2/bootstrap5-responsive.html"
         fields = ("numero_item", "kilos_netos", "fruta", "bodega", "tipo_negociacion", "user")
 
 
@@ -28,7 +28,7 @@ class InventariorealTable(tables.Table):
 
     class Meta:
         model = Item
-        template_name = "django_tables2/bootstrap5.html"
+        template_name = "django_tables2/bootstrap5-responsive.html"
         fields = ('numero_item', 'kilos_netos', 'bodega', 'fruta', 'tipo_negociacion', 'user',
                   'mover')
         attrs = {"class": "table"}
@@ -43,7 +43,7 @@ class MuestreoTable(tables.Table):
 
     class Meta:
         model = Item
-        template_name = "django_tables2/bootstrap5.html"
+        template_name = "django_tables2/bootstrap5-responsive.html"
         fields = ('numero_item', 'kilos_netos', 'bodega', 'fruta', 'tipo_negociacion', 'user',
                   'porcen_muestreo', 'tipo_muestreo', 'lider_muestreo', 'emp_muestreo')
         attrs = {"class": "table"}
@@ -54,4 +54,4 @@ class MuestreoTable(tables.Table):
 class MovimientoMuestreoTable(tables.Table):
     class Meta:
         model = Movimientosmuestreo
-        template_name = "django_tables2/bootstrap5.html"
+        template_name = "django_tables2/bootstrap5-responsive.html"

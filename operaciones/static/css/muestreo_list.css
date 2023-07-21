@@ -17,11 +17,13 @@ h1 {
     justify-content: center;
     text-align: center;
     font-family: 'Montserrat';
-    font-weight: bold;
-    font-size: 35px;
+    font-weight: 300;
+    font-size: 40px;
 }
 label {
     font-family: 'Montserrat';
+    font-weight: 600;
+    margin: 10px;
 }
 
 
@@ -83,16 +85,21 @@ label {
 
 }
 
-[name="item_busqueda"]{
-
-    width: 25%;
+[name="item_busqueda"] {
+    width: 2%;
     border-radius: 4px;
     border: none;
     padding: 8px 12px;
     background-color: #e0e0e0;
     font-family: 'Montserrat';
-    margin: 5px;
+    margin-right: 5px;
+    transition: 0.3s;
+}
 
+[name="item_busqueda"]:active,
+[name="item_busqueda"]:focus {
+    
+    width: 10%;
 }
 
 [name="volver"]{
@@ -155,4 +162,28 @@ A:hover {
 A:visited {
     color: rgb(243, 243, 243);
     text-decoration: none
+}
+
+.page-link{
+
+    z-index: 3;
+    color: #006098(--bs-pagination-active-border-color);
+    background-color: #006098;
+    border-color: #006098(--bs-pagination-active-border-color);
+
+}
+
+#muestrear{
+
+    transition: all 300ms ease 0s;
+    box-shadow: 0px 8px 15px;
+    z-index: 99;
+
+}
+
+#muestrear:hover{
+
+    transform: translateY(-5px);
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.3);
+
 }
